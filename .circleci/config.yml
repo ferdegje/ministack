@@ -1,0 +1,102 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.10.0
+    steps:
+      - checkout
+      - run:
+          name: Install terraform
+          command: |
+            mkdir /tmp/terraform
+            pushd /tmp/terraform
+            wget -c https://releases.hashicorp.com/terraform/0.11.10/terraform_0.11.10_linux_amd64.zip
+            unzip terraform_0.11.10_linux_amd64.zip
+            popd
+      - run:
+          name: Install dependencies
+          command: |
+            pushd api
+            npm install
+            popd
+      - run:
+          name: Package endpoint lambda
+          command: |
+            pushd api
+            zip -r lambda_function_payload.zip *
+            popd
+      - run:
+          name: Package dynamo processor lambda
+          command: |
+            pushd dynamo_processor
+            zip -r lambda_function_payload.zip *
+            popd
+      - run:
+          name: Apply terraform
+          command: |
+            pushd infrastructure/active
+            /tmp/terraform/terraform init
+            /tmp/terraform/terraform apply --auto-approve
+            popd
+  test:
+    docker:
+      - image: circleci/node:8.10.0
+    steps:
+      - checkout
+      - run: echo hello
+  delete:
+    docker:
+      - image: circleci/node:8.10.0
+    steps:
+      - checkout
+      - run:
+          name: Install terraform
+          command: |
+            mkdir /tmp/terraform
+            pushd /tmp/terraform
+            wget -c https://releases.hashicorp.com/terraform/0.11.10/terraform_0.11.10_linux_amd64.zip
+            unzip terraform_0.11.10_linux_amd64.zip
+            popd
+      - run:
+          name: Install dependencies
+          command: |
+            pushd api
+            npm install
+            popd
+      - run:
+          name: Package lambdas
+          command: |
+            pushd api
+            zip -r lambda_function_payload.zip *
+            popd
+      - run:
+          name: Package dynamo processor lambda
+          command: |
+            pushd dynamo_processor
+            zip -r lambda_function_payload.zip *
+            popd
+      - run:
+          name: Delete infrastructure
+          command: |
+            pushd infrastructure/dormant
+            /tmp/terraform/terraform init
+            /tmp/terraform/terraform apply --auto-approve
+            popd
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+                - beta
+    jobs:
+      - delete

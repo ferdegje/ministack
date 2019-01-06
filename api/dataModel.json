@@ -1,0 +1,28 @@
+{
+    "user": {
+        "pk": "uuid",
+        "cognitoId": "",
+        "manager": [""]
+    },
+    "gift": {
+        "pk": "uuid",
+        "forUserId": "FK to user",
+        "entered by": "FK to user"
+    },
+    "purchase": {
+        "pk": "FK to gift",
+        "user": "FK to user"
+    },
+    "contribution": {
+        "pk": "uuid",
+        "byUserId": "FK to user",
+        "forGiftId": "FK to gift",
+        "type": "complete|partial",
+        "money": "10"
+    },
+    "message": {
+        "pk": "uuid",
+        "byUserId": "FK to user",
+        "gift": "FK to gift | nothing"
+    }
+}
