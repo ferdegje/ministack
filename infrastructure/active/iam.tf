@@ -1,6 +1,6 @@
 
 resource "aws_iam_role" "iam_for_lambda" {
-  name = "iam_for_lambda_digitalmoneybox"
+  name = "${local.project}_iam_for_lambda"
 
   assume_role_policy = <<EOF
 {
@@ -21,7 +21,7 @@ EOF
 
 # See also the following AWS managed policy: AWSLambdaBasicExecutionRole
 resource "aws_iam_policy" "lambda_logging" {
-  name = "lambda_logging"
+  name = "${local.project}_lambda_logging"
   path = "/"
   description = "IAM policy for logging from a lambda"
 
@@ -48,7 +48,7 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 }
 
 resource "aws_iam_policy" "lambda_dynamo" {
-  name = "dynamodb"
+  name = "${local.project}_dynamodb"
   path = "/"
   description = "IAM policy for accessing dynamo from a lambda"
 
