@@ -1,11 +1,11 @@
 # Configure the AWS Provider
 provider "aws" {
-  region     = "eu-west-2"
+  region = "eu-west-2"
 }
 
 provider "aws" {
-  region     = "us-east-1"
-  alias = "us_east_1"
+  region = "us-east-1"
+  alias  = "us_east_1"
 }
 
 terraform {
@@ -17,15 +17,15 @@ terraform {
 }
 
 locals {
-  region = "eu-west-2"
-  accountId = "314027424334"
-  domain = "nokdo.com"
-  project = "ministack"
+  region          = "eu-west-2"
+  accountId       = "314027424334"
+  domain          = "nokdo.com"
+  project         = "ministack"
   projectLongName = "Ministack demo"
 }
 
 data "aws_route53_zone" "primary" {
-  name         = "${local.domain}."
+  name = "${local.domain}."
 }
 
 resource "aws_api_gateway_account" "demo" {

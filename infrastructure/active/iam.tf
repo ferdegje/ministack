@@ -1,4 +1,3 @@
-
 resource "aws_iam_role" "iam_for_lambda" {
   name = "${local.project}_iam_for_lambda"
 
@@ -21,8 +20,8 @@ EOF
 
 # See also the following AWS managed policy: AWSLambdaBasicExecutionRole
 resource "aws_iam_policy" "lambda_logging" {
-  name = "${local.project}_lambda_logging"
-  path = "/"
+  name        = "${local.project}_lambda_logging"
+  path        = "/"
   description = "IAM policy for logging from a lambda"
 
   policy = <<EOF
@@ -43,13 +42,13 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
-  role = "${aws_iam_role.iam_for_lambda.name}"
+  role       = "${aws_iam_role.iam_for_lambda.name}"
   policy_arn = "${aws_iam_policy.lambda_logging.arn}"
 }
 
 resource "aws_iam_policy" "lambda_dynamo" {
-  name = "${local.project}_dynamodb"
-  path = "/"
+  name        = "${local.project}_dynamodb"
+  path        = "/"
   description = "IAM policy for accessing dynamo from a lambda"
 
   policy = <<EOF
@@ -69,6 +68,6 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_dynamo" {
-  role = "${aws_iam_role.iam_for_lambda.name}"
+  role       = "${aws_iam_role.iam_for_lambda.name}"
   policy_arn = "${aws_iam_policy.lambda_dynamo.arn}"
 }

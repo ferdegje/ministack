@@ -3,27 +3,31 @@ resource "aws_kms_key" "mykey" {
   deletion_window_in_days = 10
 }
 
-
 # resource "aws_s3_bucket" "project-user-media" {
 #   bucket = "${local.project}-user-media"
 #   acl    = "private"
+
 
 #   lifecycle_rule {
 #     id      = "users"
 #     enabled = true
 
+
 #     prefix = "users/"
+
 
 #     tags = {
 #         "rule"      = "users"
 #         "autoclean" = "true"
 #     }
 
+
 #     transition {
 #         days          = 30
 #         storage_class = "STANDARD_IA" # or "ONEZONE_IA"
 #     }
 #   }
+
 
 #   server_side_encryption_configuration {
 #     rule {
@@ -33,6 +37,7 @@ resource "aws_kms_key" "mykey" {
 #       }
 #     }
 #   }
+
 
 #   tags = {
 #     Name        = "${local.project} Users Media"
