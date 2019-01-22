@@ -18,6 +18,8 @@ resource "aws_lambda_function" "example" {
   environment {
     variables = {
       foo = "bar"
+      cognitoPoolId = "${aws_cognito_user_pool.pool.id}"
+      cognitoClientId = "${aws_cognito_user_pool_client.client.id}"
     }
   }
 
