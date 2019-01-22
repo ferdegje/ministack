@@ -3,6 +3,9 @@ This code has two intents:
 1. Immediate: serve as a starting point for hackathons. In particular, the DePaul hackathon sponsored by BCG DV (https://dvimagines.bemyapp.com)
 2. In the future: serve as the starting point for future projects. To reach that stage, it would need further development, listed below.
 
+# Demo
+The ministack is accessible at https://ministackapi.nokdo.com
+
 # Content
 ## Structure
 This codebase contains the following, organised in folders:
