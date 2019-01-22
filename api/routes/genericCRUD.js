@@ -8,10 +8,9 @@ genericCRUD = (req, res) => {
         (result) => {
             console.log(req.params)
             if ("objectId" in req.params) {
-                console.debug("Specific route")
                 switch(req.method) {
                     case 'GET':
-                        new GenericEntity(user, entity).all().then((data) => res.json(data))
+                        new GenericEntity(user, entity).get(req.params.objectId).then((data) => res.json(data))
                         break
                     case 'DELETE':
                         new GenericEntity(user, entity).delete(req.params.objectId).then((data) => res.json(data)).catch(err => res.boom.badRequest(null, err))

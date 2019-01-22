@@ -28,14 +28,14 @@ module.exports = class GenericEntity {
             })
         })
     }
-    get(kidId) {
+    get(objectId) {
         var params = {
             Key: {
-                "KidId": {"S": kidId},
                 "ParentId": {"S": this.parent.cognitoUser.username}
             },
-            TableName: "PiggyBankKids"
+            TableName: process.env.projectName+this.tableName
         };
+        params["Key"][this.idKey] = {"S": objectId}
         var promise = new Promise((resolve, reject) => {
             dynamodb.getItem(params, function(err, data) {
                 if (err) {
