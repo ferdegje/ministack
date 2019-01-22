@@ -114,5 +114,5 @@ resource "aws_cloudwatch_log_group" "example" {
 }
 
 output "api_url" {
-  value = "https://${aws_api_gateway_domain_name.example}/"
+  value = "https://${aws_api_gateway_domain_name.example.domain_name}/"
 }
