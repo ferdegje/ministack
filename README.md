@@ -33,7 +33,7 @@ Simply create a dynamo table. For example by duplicating the `aws_dynamodb_table
 
 # Next steps
 This is a very basic first implementation, and avenues for improvements would include:
-0. Frontend, supporting the creation of a user, his log in, the creation/listing/deletion of an object (an article to follow the API example) and his logout.
-1. Automated tests. Currently, there aren't any.
-2. CI pipeline. Currently, there is only one environment, but it would make sense to have the concept of test and production environments.
-3. Monitoring/Logging.
+1. Frontend, supporting the creation of a user, his log in, the creation/listing/deletion of an object (an article to follow the API example) and his logout.
+2. Automated tests. Currently, there aren't any.
+3. CI pipeline. Currently, there is only one environment, but it would make sense to have the concept of test and production environments.
+4. Monitoring/Logging.
