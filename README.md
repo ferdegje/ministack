@@ -4,7 +4,7 @@ This code has two intents:
 2. In the future: serve as the starting point for future projects. To reach that stage, it would need further development, listed below.
 
 # Demo
-The ministack is accessible at https://ministackapi.nokdo.com
+The ministack is accessible at https://ministackapi.nokdo.com/ping
 
 # Content
 ## Structure
