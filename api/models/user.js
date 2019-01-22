@@ -130,8 +130,8 @@ module.exports = class User {
             // console.log(authenticationData)
             var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
             const poolData = {
-                UserPoolId : "eu-west-2_GdTIYX9IM", // Your user pool id here
-                ClientId : "h4ni8ppij33t8jqtgj8qtiba4" // Your client id here
+                UserPoolId : process.env.cognitoPoolId, // Your user pool id here
+                ClientId : process.env.cognitoClientId // Your client id here
             };
             
             const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
