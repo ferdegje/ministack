@@ -1,5 +1,5 @@
 resource "aws_cognito_user_pool" "pool" {
-  name = "Digital Moneybox"
+  name = "${local.projectLongName}"
 
   auto_verified_attributes = ["email"]
   username_attributes      = ["email"]
