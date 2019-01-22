@@ -32,6 +32,12 @@ jobs:
             zip -r lambda_function_payload.zip *
             popd
       - run:
+          name: Check terraform state path
+          command: |
+            pushd infrastructure
+            ./checkStatePath.sh
+            popd
+      - run:
           name: Apply terraform
           command: |
             pushd infrastructure/active

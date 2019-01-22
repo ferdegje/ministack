@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 echo totoo
-EXPECTED_VALUE=`git remote -v | cut -d "@" -f 2 | cut -d "(" -f 1 | sed s_:_/_ | sed s_.git_/terraform.tfstate_ | tr -d " "`
+EXPECTED_VALUE=`git remote -v | grep fetch | cut -d "@" -f 2 | cut -d "(" -f 1 | sed s_:_/_ | sed s_.git_/terraform.tfstate_ | tr -d " "`
 echo "EXPECTED_VALUE: $EXPECTED_VALUE"
 for i in `ls -d */`; do
     pushd $i
@@ -17,7 +17,7 @@ EXPECTED = '$EXPECTED_VALUE'
             "
             exit 1
         else
-            echo "Value is correct"
+            echo "Path value of $i folder is correct"
         fi
     popd
 done
