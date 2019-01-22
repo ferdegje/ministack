@@ -52,6 +52,7 @@
     "pug": "^2.0.0-rc.1",
     "randomstring": "^1.1.5",
     "request": "^2.88.0",
+    "ucfirst": "^1.0.0",
     "uuid": "^3.3.2"
   }
 }

@@ -15,9 +15,22 @@ var userGet = require('./routes/userGet')
 var allKids = require('./routes/allKids')
 var allNews = require('./routes/allNews')
 var specificKid = require('./routes/specificKid')
+var genericCRUD = require('./routes/genericCRUD')
 var mediaUploadLink = require('./routes/mediaUploadLink')
 app.set('view engine', 'pug')
 
+if (process.env.cognitoPoolId === undefined) {
+    console.error("Environment variable cognitoPoolId needs to be defined. It can be retrieved from the Terraform output.")
+    process.exit(2)
+}
+if (process.env.cognitoClientId === undefined) {
+  console.error("Environment variable cognitoClientId needs to be defined. It can be retrieved from the Terraform output.")
+  process.exit(2)
+}
+if (process.env.projectName === undefined) {
+  console.error("Environment variable projectName needs to be defined. It can be retrieved from the Terraform output.")
+  process.exit(2)
+}
 // if (process.env.NODE_ENV === 'test') {
 //   // NOTE: aws-serverless-express uses this app for its integration tests
 //   // and only applies compression to the /sam endpoint during testing.
@@ -40,10 +53,11 @@ router.post('/register', register)
 router.post('/validate', validate)
 router.get('/user', userGet)
 router.delete('/user', userDelete)
-router.all('/gifts', allKids)
-router.all('/gifts/:kidId([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})', specificKid)
-router.all('/news', allNews)
-router.all('/news/:newsId([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})', allNews)
+router.all('/:entityName([a-zA-Z0-9]*)', genericCRUD)
+// router.all('/gifts', allKids)
+// router.all('/gifts/:kidId([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})', specificKid)
+// router.all('/news', allNews)
+// router.all('/news/:newsId([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})', allNews)
 
 router.get('/', (req, res) => {
   res.render('index', {

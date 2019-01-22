@@ -24,6 +24,10 @@ locals {
   projectLongName = "Ministack demo"
 }
 
+output "projectName" {
+  value = "${local.project}"
+}
+
 data "aws_route53_zone" "primary" {
   name = "${local.domain}."
 }
