@@ -6,18 +6,32 @@ genericCRUD = (req, res) => {
   let entity = req.params.entityName.replace("/", "")
   user.authenticate(req, res).then(
         (result) => {
-            switch(req.method) {
-                case 'GET':
-                    console.log(entity)
-                    res.boom.methodNotAllowed()
-                    new GenericEntity(user, entity).all().then((data) => res.json(data))
-                    break
-                case 'POST':
-                    new Kid(user).add(req.body).then((kids) => res.json(kids)).catch(err => res.boom.badRequest(null, err))
-                    break
-                default:
-                    res.boom.methodNotAllowed()                
+            console.log(req.params)
+            if ("objectId" in req.params) {
+                console.debug("Specific route")
+                switch(req.method) {
+                    case 'GET':
+                        new GenericEntity(user, entity).all().then((data) => res.json(data))
+                        break
+                    case 'DELETE':
+                        new GenericEntity(user, entity).delete(req.params.objectId).then((data) => res.json(data)).catch(err => res.boom.badRequest(null, err))
+                        break
+                    default:
+                        res.boom.methodNotAllowed()                
+                }
+            } else {
+                switch(req.method) {
+                    case 'GET':
+                        new GenericEntity(user, entity).all().then((data) => res.json(data))
+                        break
+                    case 'POST':
+                        new GenericEntity(user, entity).add(req.body).then((data) => res.json(data)).catch(err => res.boom.badRequest(null, err))
+                        break
+                    default:
+                        res.boom.methodNotAllowed()                
+                }
             }
+            
     })
     .catch((err) => {
         if (err.code && err.code == "NotAuthorizedException") {

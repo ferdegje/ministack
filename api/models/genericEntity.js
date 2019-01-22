@@ -8,18 +8,19 @@ module.exports = class GenericEntity {
     constructor(parent, entityName) {
         this.parent = parent
         this.entityName = entityName
-        this.idKey = ucfirst(entityName)
+        this.idKey = ucfirst(entityName)+"Id"
         this.tableName = ucfirst(entityName)
     }
 
-    delete(kidId) {
+    delete(objectId) {
         var params = {
             Key: {
-                "KidId": {"S": kidId},
                 "ParentId": {"S": this.parent.cognitoUser.username}
             },
-            TableName: "PiggyBankKids"
+            TableName: process.env.projectName+this.tableName
         };
+        params["Key"][this.idKey] = {"S": objectId}
+        console.debug(params)
         return new Promise((resolve, reject) => {
             dynamodb.deleteItem(params, function(err, data) {
                 if (err) reject(err); // an error occurred
@@ -68,43 +69,39 @@ module.exports = class GenericEntity {
         return promise
     }
 
-    add(/*object*/kidsList) {
+    add(/*object*/entityList) {
         let listOfPromises = []
-        if (typeof(kidsList) !== "object") {
+        if (typeof(entityList) !== "object") {
             throw new Error("Was expecting a dictionary")
         }
-        kidsList.forEach((aKid) => {
+        entityList.forEach((anObjectPayload) => {
             listOfPromises.push(new Promise((resolve, reject) => {
-                if ('ParentId' in aKid) {
+                if ('ParentId' in anObjectPayload) {
                     reject({"message": "ParentId cannot be supplied", "code": "ParentIdShouldNotBeSupplied"}) 
                     return
                 }
-                if ('KidId' in aKid) {
-                    reject({"message": "KidId cannot be supplied", "code": "KidIdShouldNotBeSupplied"})
+                if (this.idKey in anObjectPayload) {
+                    reject({"message": this.idKey+" cannot be supplied", "code": "EntityKeyShouldNotBeSupplied"})
                     return
                 }
-                if ('status' in aKid) {
-                    reject({"message": "Status cannot be supplied", "code": "StatusShouldNotBeSupplied"})
-                    return
-                }
-                aKid.ParentId = this.parent.cognitoUser.username
-                aKid.KidId = uuidv4()
-                aKid.status = "created"
-                Object.keys(aKid).forEach((k) => {
-                    if (typeof(aKid[k]) == "string") {
-                        aKid[k]= {"S": aKid[k]}
+                anObjectPayload.ParentId = this.parent.cognitoUser.username
+                anObjectPayload[this.idKey] = uuidv4()
+                Object.keys(anObjectPayload).forEach((k) => {
+                    if (typeof(anObjectPayload[k]) == "string") {
+                        anObjectPayload[k]= {"S": anObjectPayload[k]}
                     }
                 })
                 let params = {
-                    TableName: "PiggyBankKids",
-                    Item: aKid
+                    TableName: process.env.projectName+this.tableName,
+                    Item: anObjectPayload
                 }
+                console.log(params)
                 dynamodb.putItem(params, function(err, data) {
                     if (err) {
                         console.log("Error", err);
                         reject(err)
                     } else {
-                        resolve(aKid)
+                        resolve(anObjectPayload)
                     }
                 })
             }))
@@ -122,7 +119,7 @@ module.exports = class GenericEntity {
                     S: this.parent.cognitoUser.username
                 }
             }, 
-            KeyConditionExpression: this.idKey+" = :v1", 
+            KeyConditionExpression: "ParentId = :v1", 
             // ProjectionExpression: "KidId", 
             TableName: process.env.projectName+this.tableName,
             IndexName: "ParentIdIndex",

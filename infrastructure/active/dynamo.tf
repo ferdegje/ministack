@@ -2,7 +2,7 @@ resource "aws_dynamodb_table" "article" {
   name             = "${local.project}Article"
   billing_mode     = "PAY_PER_REQUEST"
   hash_key         = "ArticleId"
-  # range_key        = "ParentId"
+  range_key        = "ParentId"
   stream_enabled   = true
   stream_view_type = "NEW_AND_OLD_IMAGES"
 
