@@ -16,6 +16,8 @@ RECEIVED = '$RECEIVED_VALUE'
 EXPECTED = '$EXPECTED_VALUE'
             "
             exit 1
+        else
+            echo "Value is correct"
         fi
     popd
 done
