@@ -3,7 +3,7 @@ data "aws_route53_zone" "selected" {
 }
 
 resource "aws_route53_record" "www" {
-  zone_id = "${aws_route53_zone.selected.zone_id}"
+  zone_id = "${data.aws_route53_zone.selected.zone_id}"
   name    = "${local.project}.${local.domain}"
   type    = "A"
 
