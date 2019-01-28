@@ -3,6 +3,17 @@ resource "aws_kms_key" "mykey" {
   deletion_window_in_days = 10
 }
 
+resource "aws_s3_bucket" "www" {
+  bucket = "www.${local.domain}"
+  acl    = "public-read"
+  policy = "${file("website_policy.json")}"
+
+  website {
+    index_document = "index.html"
+    error_document = "error.html"
+  }
+}
+
 # resource "aws_s3_bucket" "project-user-media" {
 #   bucket = "${local.project}-user-media"
 #   acl    = "private"
