@@ -13,6 +13,24 @@ resource "aws_s3_bucket" "www" {
   }
 }
 
+resource "aws_s3_bucket_policy" "default" {
+  bucket = "${aws_s3_bucket.www.id}"
+  policy = "${data.aws_iam_policy_document.default.json}"
+}
+
+data "aws_iam_policy_document" "default" {
+  statement = [{
+    actions = ["s3:GetObject"]
+
+    resources = ["${aws_s3_bucket.www.arn}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+  }]
+}
+
 # resource "aws_s3_bucket" "project-user-media" {
 #   bucket = "${local.project}-user-media"
 #   acl    = "private"
