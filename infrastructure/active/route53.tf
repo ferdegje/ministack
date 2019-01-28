@@ -4,11 +4,11 @@ data "aws_route53_zone" "selected" {
 
 resource "aws_route53_record" "www" {
   zone_id = "${data.aws_route53_zone.selected.zone_id}"
-  name    = "${local.project}.${local.domain}"
+  name    = "${aws_s3_bucket.www.bucket}"
   type    = "A"
 
   alias {
-    name                   = "${aws_s3_bucket.www.bucket_domain_name}"
+    name                   = "${aws_s3_bucket.www.bucket}"
     zone_id                = "${aws_s3_bucket.www.hosted_zone_id}"
     evaluate_target_health = true
   }
