@@ -49,6 +49,7 @@ jobs:
           command: |
             curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
             sudo python get-pip.py
+            sudo apt-get install python-dev
             pip install awscli --upgrade --user
             aws --version
       - run:
