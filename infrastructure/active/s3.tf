@@ -6,7 +6,6 @@ resource "aws_kms_key" "mykey" {
 resource "aws_s3_bucket" "www" {
   bucket = "www.${local.domain}"
   acl    = "public-read"
-  policy = "${file("website_policy.json")}"
 
   website {
     index_document = "index.html"
