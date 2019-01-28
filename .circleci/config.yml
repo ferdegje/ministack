@@ -44,6 +44,17 @@ jobs:
             /tmp/terraform/terraform init
             /tmp/terraform/terraform apply --auto-approve
             popd
+      - run:
+          name: Install AWS cli
+          command: |
+            pip install awscli --upgrade --user
+            aws --version
+      - run:
+          name: Deploy website
+          command: |
+            pushd website
+            aws s3 sync ./ s3://www.nokdo.com --delete --acl public-read
+            popd
   test:
     docker:
       - image: circleci/node:8.10.0
