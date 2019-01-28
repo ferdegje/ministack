@@ -20,11 +20,12 @@ The API exposes the following endpoints:
 - `POST /validate` with payload `{"username': "john@doe.com", "code": "123456"}` will validate the user
 - `GET /user` with basic auth will return the user
 - `DELETE /user` with basic auth will delete the user
-- the api also implements a generic Create/List/Delete endpoint. For example, if a Dynamo table named `Article` exists, the following endpoints will work:
--- `GET /article` with basic auth will return a list of all articles
--- `POST /article` with  basic auth and payload `[{"author": "Emile Zola"}]` will create an article object. It will append to the given payload a unique id and a parent id matching the user that created it.
--- `GET /article/{xyz}` with basic auth will return article whose id match xyz if that object was created by the user.
--- `DELETE /article/{xyz}` with basic auth will delete article xyz if such an object exists AND is associated with the user
+
+The api also implements a generic Create/List/Delete endpoint. For example, if a Dynamo table named `Article` exists, the following endpoints will work:
+- `GET /article` with basic auth will return a list of all articles
+- `POST /article` with  basic auth and payload `[{"author": "Emile Zola"}]` will create an article object. It will append to the given payload a unique id and a parent id matching the user that created it.
+- `GET /article/{xyz}` with basic auth will return article whose id match xyz if that object was created by the user.
+- `DELETE /article/{xyz}` with basic auth will delete article xyz if such an object exists AND is associated with the user
 
 # How to
 ## Add a generic Create/List/Delete endpoint
