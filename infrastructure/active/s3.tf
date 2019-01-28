@@ -4,13 +4,17 @@ resource "aws_kms_key" "mykey" {
 }
 
 resource "aws_s3_bucket" "www" {
-  bucket = "www.${local.domain}"
+  bucket = "${local.project}.${local.domain}"
   acl    = "public-read"
 
   website {
     index_document = "index.html"
     error_document = "error.html"
   }
+}
+
+output "www" {
+  value = "${aws_s3_bucket.www.bucket}"
 }
 
 resource "aws_s3_bucket_policy" "default" {
