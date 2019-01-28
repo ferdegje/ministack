@@ -54,9 +54,16 @@ jobs:
             sudo pip install awscli --upgrade
             aws --version
       - run:
-          name: Deploy website
+          name: Build website
           command: |
             pushd website
+            npm install
+            npm run build
+            popd
+      - run:
+          name: Deploy website
+          command: |
+            pushd website/build
             aws s3 sync ./ s3://`grep www /tmp/terraform.output | cut -d = -f 2 | tr -d " "` --delete --acl public-read
             popd
   test:
