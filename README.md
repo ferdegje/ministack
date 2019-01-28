@@ -12,6 +12,7 @@ This codebase contains the following, organised in folders:
 1. a CD pipeline implemented by CircleCI in the .circleci folder. The pipeline is very basic and does the following: package the lambda functions, deploy them and the rest of the infrastructure via the execution of terraform scripts. At midnight every day, the pipeline also swaps the infrastructure as detailed below.
 2. an infrastructure. The infrastructure folder has two structures: active and dormant. Active correspond to the working stack, dormant correspond to the remaining assets that we don't want to delete on a regular basis (at time of writing, only a cert since AWS has a limit of 20 certs creations per year).
 3. an API layer in the api folder. This is deployed as a lambda and currently implements a basic Create/List/Delete interface alongside a user creation/validation/deletion flow.
+4. a static react website in the website folder. This is deployed on S3.
 
 ## The API
 The API exposes the following endpoints:
