@@ -1,25 +1,24 @@
 import React from "react";
-import { render } from "react-dom";
-import { Provider } from "react-redux";
-import store from "./store/index";
-import App from "./components/App.jsx";
-import './bootstrap.css';
+import ReactDOM from "react-dom";
+import { createBrowserHistory } from "history";
+import { Router, Route, Switch } from "react-router-dom";
 
-// if you're in create-react-app import the files as:
-// import store from "./js/store/index";
-// import App from "./js/components/App.jsx";
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  // The target element might be either root or app,
-  // depending on your development environment
-  // document.getElementById("app")
+import "assets/css/material-dashboard-react.css?v=1.5.0";
+
+import indexRoutes from "routes/index.jsx";
+import PrivateRoute from "components/PrivateRoute/PrivateRoute";
+
+const hist = createBrowserHistory();
+
+ReactDOM.render(
+  <Router history={hist}>
+    <Switch>
+      {indexRoutes.map((prop, key) => {
+        if (prop.private)
+          return <PrivateRoute path={prop.path} component={prop.component} key={key} />;  
+        return <Route path={prop.path} component={prop.component} key={key} />;
+      })}
+    </Switch>
+  </Router>,
   document.getElementById("root")
 );
-window.store = store;
-// window.addArticle = addArticle;
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-// serviceWorker.unregister();
