@@ -1,4 +1,8 @@
 import React from "react";
+import { connect } from 'react-redux'
+
+import registerUser from '../../redux/actions/RegisterUser'
+
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
@@ -44,6 +48,13 @@ class UserLogin extends React.Component {
 
   registerBtnClick = () => {
     console.log("hello", this.state);
+    let registrationDetails = {}
+    for (var k in this.state) {
+      if (k.replace("registration_","") !== k) {
+        registrationDetails[k.replace("registration_", "")] = this.state[k]
+      }
+    }
+    this.props.registerUser(registrationDetails)
   }
 
   inputChanged = (evt) => {
@@ -77,7 +88,7 @@ class UserLogin extends React.Component {
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText="Email address"
-                      id="email-address"
+                      id="registration_email"
                       inputProps={this.inputProps}
                       formControlProps={{
                         fullWidth: true
@@ -90,7 +101,7 @@ class UserLogin extends React.Component {
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
                       labelText="First Name"
-                      id="first-name"
+                      id="registration_first-name"
                       inputProps={this.inputProps}
                       formControlProps={{
                         fullWidth: true
@@ -100,7 +111,7 @@ class UserLogin extends React.Component {
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
                       labelText="Last Name"
-                      id="last-name"
+                      id="registration_last-name"
                       inputProps={this.inputProps}
                       formControlProps={{
                         fullWidth: true
@@ -112,7 +123,7 @@ class UserLogin extends React.Component {
                   <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
                       labelText="Password"
-                      id="password"
+                      id="registration_password"
                       inputProps={this.inputProps}
                       formControlProps={{
                         fullWidth: true
@@ -122,7 +133,7 @@ class UserLogin extends React.Component {
                   <GridItem xs={12} sm={12} md={8}>
                     <CustomInput
                       labelText="Personal quote"
-                      id="personal-quote"
+                      id="registration_personal-quote"
                       inputProps={this.inputProps}
                       formControlProps={{
                         fullWidth: true
@@ -179,4 +190,14 @@ class UserLogin extends React.Component {
   }
 }
 
-export default withStyles(styles)(UserLogin);
+const mapStateToProps = state => ({
+})
+
+const mapDispatchToProps = dispatch => ({
+  registerUser: registrationDetails => dispatch(registerUser(registrationDetails))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(UserLogin))
