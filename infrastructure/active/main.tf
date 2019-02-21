@@ -10,8 +10,8 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "terraform-state-packathon"
-    key    = "github.com/FitMiles/ministack/terraform.tfstate"
+    bucket = "terraform-state-jmf"
+    key    = "github.com/ferdegje/ministack/terraform.tfstate"
     region = "eu-west-2"
   }
 }
