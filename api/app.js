@@ -45,8 +45,18 @@ router.use(awsServerlessExpressMiddleware.eventContext())
 // NOTE: tests can't find the views directory without this
 app.set('views', path.join(__dirname, 'views'))
 
-router.get('/ping', (req, res) => {
-  res.json("pong")
+router.get('/ping', (req, res, callback) => {
+  const response = {
+    statusCode: 200,
+    // HERE'S THE CRITICAL PART
+    headers: {
+      "Access-Control-Allow-Origin" : "*" // Required for CORS support to work
+    },
+    body: JSON.stringify({ "message": "Hello World!" })
+  };
+
+  callback(null, response);
+  // res.json("pong")
 })
 router.get('/mediauploadlink', mediaUploadLink)
 router.post('/register', register)
