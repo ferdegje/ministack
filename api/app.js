@@ -45,7 +45,7 @@ router.use(awsServerlessExpressMiddleware.eventContext())
 // NOTE: tests can't find the views directory without this
 app.set('views', path.join(__dirname, 'views'))
 
-router.get('/ping', (req, res, callback) => {
+router.get('/pinglambda', (req, res, callback) => {
   const response = {
     statusCode: 200,
     // HERE'S THE CRITICAL PART
