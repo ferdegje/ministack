@@ -18,10 +18,10 @@ terraform {
 
 locals {
   region          = "eu-west-2"
-  accountId       = "314027424334"
-  domain          = "nokdo.com"
-  project         = "ministack"
-  projectLongName = "Ministack demo"
+  accountId       = "787523513059"
+  domain          = "gopackathon.com"
+  project         = "packathon"
+  projectLongName = "Packathon"
 }
 
 output "projectName" {
