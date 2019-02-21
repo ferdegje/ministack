@@ -73,6 +73,13 @@ resource "aws_api_gateway_integration" "lambda_root" {
   uri                     = "${aws_lambda_function.example.invoke_arn}"
 }
 
+module "MyResourceCors" {
+  source = "github.com/carrot/terraform-api-gateway-cors-module"
+  resource_name = "MyResource"
+  resource_id = "${aws_api_gateway_resource.proxy.id}"
+  rest_api_id = "${aws_api_gateway_rest_api.example.id}"
+}
+
 resource "aws_api_gateway_deployment" "example" {
   depends_on = [
     "aws_api_gateway_integration.lambda",
