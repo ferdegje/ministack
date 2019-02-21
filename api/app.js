@@ -60,6 +60,11 @@ router.all('/:entityName([a-zA-Z0-9]+)/:objectId([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f
 // The aws-serverless-express library creates a server and listens on a Unix
 // Domain Socket for you, so you can remove the usual call to app.listen.
 // app.listen(3000)
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use('/', router)
 
 // Export your express server so you can import it in the lambda function.
