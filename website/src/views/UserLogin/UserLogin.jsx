@@ -88,24 +88,6 @@ class UserLogin extends React.Component {
                 <h4 className={this.props.classes.cardTitleWhite}>Register</h4>
                 <p className={this.props.classes.cardCategoryWhite}>Create your account</p>
               </CardHeader>
-              
-                {this.state.waitingForCode?(
-                  <CardBody>
-                    <GridContainer>
-                      <GridItem xs={6} sm={6} md={6}>
-                        <CustomInput
-                          labelText="Validation code"
-                          id="validation_code"
-                          inputProps={this.inputProps}
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                          
-                        />
-                      </GridItem>
-                    </GridContainer>
-                  </CardBody>
-                ):(
                   <CardBody>
                     <GridContainer>
                       <GridItem xs={12} sm={12} md={12}>
@@ -121,28 +103,6 @@ class UserLogin extends React.Component {
                       </GridItem>
                     </GridContainer>
                     <GridContainer>
-                      <GridItem xs={12} sm={12} md={6}>
-                        <CustomInput
-                          labelText="First Name"
-                          id="registration_first-name"
-                          inputProps={this.inputProps}
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                        />
-                      </GridItem>
-                      <GridItem xs={12} sm={12} md={6}>
-                        <CustomInput
-                          labelText="Last Name"
-                          id="registration_last-name"
-                          inputProps={this.inputProps}
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                        />
-                      </GridItem>
-                    </GridContainer>
-                    <GridContainer>
                       <GridItem xs={12} sm={12} md={4}>
                         <CustomInput
                           labelText="Password"
@@ -153,19 +113,22 @@ class UserLogin extends React.Component {
                           }}
                         />
                       </GridItem>
-                      <GridItem xs={12} sm={12} md={8}>
+                      { this.state.waitingForCode?(
+                        <GridItem xs={12} sm={12} md={8}>
                         <CustomInput
-                          labelText="Personal quote"
-                          id="registration_personal-quote"
+                          labelText="Validation code"
+                          id="validation_code"
                           inputProps={this.inputProps}
                           formControlProps={{
                             fullWidth: true
                           }}
                         />
                       </GridItem>
+                      ):(<GridItem></GridItem>)}
+                      
                     </GridContainer>
                 </CardBody>
-                )}
+                
               <CardFooter>
                 {this.state.waitingForCode? (
                   <Button color="primary" onClick={this.validateCode}>Validate code</Button>

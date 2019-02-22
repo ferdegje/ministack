@@ -8,6 +8,7 @@ import { combineReducers } from 'redux'
 import ReducerRegisterUser from './redux/reducers/RegisterUser'
 import ReducerInit from './redux/reducers/Init'
 import ReducerRegisterUserSuccess from './redux/reducers/RegisterUserSuccess'
+import ReducerValidateUserSuccess from './redux/reducers/ValidateUserSuccess'
 
 import "assets/css/material-dashboard-react.css?v=1.5.0";
 
@@ -48,7 +49,8 @@ const store = createStore(
   combineReducers({
     ReducerInit,
     ReducerRegisterUser,
-    ReducerRegisterUserSuccess
+    ReducerRegisterUserSuccess,
+    ReducerValidateUserSuccess,
   }),
   applyMiddleware(
     //all middlewares
