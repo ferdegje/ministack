@@ -12,7 +12,8 @@ const PleaseLogin = () => (
  
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
-        fakeAuth.isAuthenticated === false
+        // <Component {...props} />
+        fakeAuth.isAuth() !== false
         ? <Component {...props} />
         : <PleaseLogin />
     )} />

@@ -1,5 +1,4 @@
 const initialState = {
-    initialised: true,
 }
   
 export default function ReducerInit(state=initialState, action) {
