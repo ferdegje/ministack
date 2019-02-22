@@ -9,7 +9,7 @@ import ReducerRegisterUser from './redux/reducers/RegisterUser'
 import ReducerInit from './redux/reducers/Init'
 import ReducerRegisterUserSuccess from './redux/reducers/RegisterUserSuccess'
 import ReducerValidateUserSuccess from './redux/reducers/ValidateUserSuccess'
-
+import ReducerUserLoginSuccess from './redux/reducers/UserLoginSuccess'
 import "assets/css/material-dashboard-react.css?v=1.5.0";
 
 import indexRoutes from "routes/index.jsx";
@@ -26,17 +26,17 @@ const client = axios.create({ //all axios can be used, shown in axios documentat
   responseType: 'json'
 });
 
-var authorizationHeader = ""
+// var authorizationHeader = ""
 
-if (fakeAuth.isAuth()) {
-  authorizationHeader = fakeAuth.authorizationHeader
-}
+// if (fakeAuth.isAuth()) {
+//   authorizationHeader = fakeAuth.authorizationHeader
+// }
 
 client.interceptors.request.use(function (config) {
   // Do something before request is sent
-  if (authorizationHeader !== "") {
+  if (fakeAuth.isAuth()) {
     console.log("User is authenticated")
-    config.headers.Authorization = authorizationHeader
+    config.headers.Authorization = fakeAuth.authorizationHeader
   }
   console.log("Axios config", config)
   return config;
@@ -51,6 +51,7 @@ const store = createStore(
     ReducerRegisterUser,
     ReducerRegisterUserSuccess,
     ReducerValidateUserSuccess,
+    ReducerUserLoginSuccess,
   }),
   applyMiddleware(
     //all middlewares

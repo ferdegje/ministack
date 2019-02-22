@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import registerUser from '../../redux/actions/RegisterUser'
 import validateUser from '../../redux/actions/ValidateUser'
+import userLogin from '../../redux/actions/UserLogin'
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -49,6 +50,14 @@ class UserLogin extends React.Component {
 
   validateCode = () => {
     this.props.validateUser({"code": this.state.validation_code})
+  }
+
+  userLogin = () => {
+    var loginDetails = {
+      "email": this.state.loginemail,
+      "password": this.state.loginpassword
+    }
+    this.props.userLogin(loginDetails)
   }
 
   registerBtnClick = () => {
@@ -150,7 +159,8 @@ class UserLogin extends React.Component {
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText="Email address"
-                      id="email-address"
+                      id="loginemail"
+                      inputProps={this.inputProps}
                       formControlProps={{
                         fullWidth: true
                       }}
@@ -162,7 +172,8 @@ class UserLogin extends React.Component {
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText="Password"
-                      id="password"
+                      id="loginpassword"
+                      inputProps={this.inputProps}
                       formControlProps={{
                         fullWidth: true
                       }}
@@ -172,7 +183,7 @@ class UserLogin extends React.Component {
                 </GridContainer>
               </CardBody>
               <CardFooter>
-                <Button color="info">{this.state.displayCode || "false" } Log in</Button>
+                <Button color="info" onClick={this.userLogin}>Log in</Button>
               </CardFooter>
             </Card>
           </GridItem>
@@ -189,6 +200,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   registerUser: registrationDetails => dispatch(registerUser(registrationDetails)),
   validateUser: data => dispatch(validateUser(data)),
+  userLogin: data => dispatch(userLogin(data)),
 })
 
 export default connect(
