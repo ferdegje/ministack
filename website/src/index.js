@@ -10,6 +10,8 @@ import ReducerInit from './redux/reducers/Init'
 import ReducerRegisterUserSuccess from './redux/reducers/RegisterUserSuccess'
 import ReducerValidateUserSuccess from './redux/reducers/ValidateUserSuccess'
 import ReducerUserLoginSuccess from './redux/reducers/UserLoginSuccess'
+import ReducerTestReducer from './redux/reducers/TestReducer'
+
 import "assets/css/material-dashboard-react.css?v=1.5.0";
 
 import indexRoutes from "routes/index.jsx";
@@ -52,6 +54,7 @@ const store = createStore(
     ReducerRegisterUserSuccess,
     ReducerValidateUserSuccess,
     ReducerUserLoginSuccess,
+    ReducerTestReducer,
   }),
   applyMiddleware(
     //all middlewares

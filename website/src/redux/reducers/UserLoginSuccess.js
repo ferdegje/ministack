@@ -7,9 +7,11 @@ function expireCookie(cname) {
 }
 export default function ReducerUserLoginSuccess(state=initialState, action) {
     if (action.type === strings.USER_LOGIN_SUCCESS) {
-        expireCookie("pendingLogin")        
+        expireCookie("pendingLogin")  
+        console.log("ok yes yes")    
         return [...state,
         {
+            action: action
         }]
     }
     return state

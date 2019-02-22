@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from "react";
+import { connect } from 'react-redux'
 import PropTypes from "prop-types";
 import { Switch, Route, Redirect } from "react-router-dom";
 // creates a beautiful scrollbar
@@ -59,6 +60,10 @@ class App extends React.Component {
     }
     window.addEventListener("resize", this.resizeFunction);
   }
+
+  stateChange(data) {
+    console.log("State has changed", data)
+  }
   componentDidUpdate(e) {
     if (e.history.location.pathname !== e.location.pathname) {
       this.refs.mainPanel.scrollTop = 0;
@@ -68,15 +73,18 @@ class App extends React.Component {
     }
   }
   componentWillUnmount() {
+    window.removeEventListener("userLogin", this.render)
     window.removeEventListener("resize", this.resizeFunction);
   }
   render() {
+    console.log("I am being rerendered")
+    console.log(this.props)
     const { classes, ...rest } = this.props;
     return (
       <div className={classes.wrapper}>
         <Sidebar
           routes={dashboardRoutes}
-          logoText={"Creative Tim"}
+          logoText={this.props.ReducerTestReducer.testReducer}
           logo={logo}
           image={image}
           handleDrawerToggle={this.handleDrawerToggle}
@@ -93,10 +101,30 @@ class App extends React.Component {
           {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {this.getRoute() ? (
             <div className={classes.content}>
-              <div className={classes.container}>{switchRoutes}</div>
+              <div className={classes.container}>
+                <Switch>
+                  {dashboardRoutes.map((prop, key) => {
+                    if (prop.redirect)
+                      return <Redirect from={prop.path} to={prop.to} key={key} />;
+                    if (prop.private && !fakeAuth.isAuth())
+                      return <Route path={prop.path} component={UserLogin} key={key} />;  
+                    return <Route path={prop.path} component={prop.component} key={key} />;
+                  })}
+                </Switch>
+              </div>
             </div>
           ) : (
-            <div className={classes.map}>{switchRoutes}</div>
+            <div className={classes.map}>
+              <Switch>
+                  {dashboardRoutes.map((prop, key) => {
+                    if (prop.redirect)
+                      return <Redirect from={prop.path} to={prop.to} key={key} />;
+                    if (prop.private && !fakeAuth.isAuth())
+                      return <Route path={prop.path} component={UserLogin} key={key} />;  
+                    return <Route path={prop.path} component={prop.component} key={key} />;
+                  })}
+                </Switch>
+            </div>
           )}
           {this.getRoute() ? <Footer /> : null}
         </div>
@@ -109,4 +137,17 @@ App.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(dashboardStyle)(App);
+const mapStateToProps = state => {
+  return { 
+    ReducerTestReducer: state.ReducerTestReducer,
+    ReducerUserLoginSuccess: state.ReducerUserLoginSuccess
+  }
+};
+
+const mapDispatchToProps = dispatch => ({
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(dashboardStyle)(App))
