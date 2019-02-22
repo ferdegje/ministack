@@ -59,7 +59,8 @@ const dashboardRoutes = [
     sidebarName: "Maps",
     navbarName: "Map",
     icon: LocationOn,
-    component: Maps
+    component: Maps,
+    private: true
   },
   {
     path: "/notifications",

@@ -11,7 +11,7 @@ function setCookie(cname, cvalue, exdays) {
 export default function ReducerValidateUserSuccess(state=initialState, action) {
     if (action.type === strings.VALIDATE_USER_SUCCESS) {
         console.log("User is now validated")
-        setCookie("unverified", "true", 0)
+        setCookie("unverified", "true", -1)
         return [...state,
         {
         }]

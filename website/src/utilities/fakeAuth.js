@@ -19,6 +19,7 @@ const fakeAuth = {
     authorizationHeader: "",
     isAuth() {
       if (this.isAuthenticated) {
+        console.log("User authenticated", "Was authenticated before")
         return true
       }
       let username = getCookie("username")
@@ -27,8 +28,10 @@ const fakeAuth = {
       if (unverified === "" && username !== "" && password !== "") {
         this.authorizationHeader = "Basic " + btoa(username + ":" + password)
         this.isAuthenticated = true
+        console.log("User authenticated", "Newly authenticated")
         return true
       }
+      console.log("User not authenticated")
       return false
     },
     authenticate(cb) {
