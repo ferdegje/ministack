@@ -44,6 +44,7 @@ jobs:
             /tmp/terraform/terraform init
             /tmp/terraform/terraform apply --auto-approve
             /tmp/terraform/terraform output > /tmp/terraform.output
+            cat /tmp/terraform.output
             popd
       - run:
           name: Install AWS cli
