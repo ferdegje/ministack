@@ -10,18 +10,18 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "terraform-state-packathon"
-    key    = "github.com/FitMiles/ministack/terraform.tfstate"
+    bucket = "terraform-state-jmf"
+    key    = "github.com/ferdegje/ministack/terraform.tfstate"
     region = "eu-west-2"
   }
 }
 
 locals {
   region          = "eu-west-2"
-  accountId       = "787523513059"
-  domain          = "gopackathon.com"
-  project         = "packathon"
-  projectLongName = "Packathon"
+  accountId       = "314027424334"
+  domain          = "nokdo.com"
+  project         = "ministack"
+  projectLongName = "Ministack demo"
 }
 
 output "projectName" {
