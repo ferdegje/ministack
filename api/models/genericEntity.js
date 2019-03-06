@@ -96,6 +96,7 @@ module.exports = class GenericEntity {
                     Item: anObjectPayload
                 }
                 console.log(params)
+                console.log("reaching here")
                 dynamodb.putItem(params, function(err, data) {
                     if (err) {
                         console.log("Error", err);

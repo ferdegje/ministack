@@ -23,10 +23,15 @@ register = (req, res) => {
   const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
   var attributeList = [];
     attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"email",Value:req.body.email}));
-    const password = randomstring.generate({
-      length: 12,
-      charset: 'alphabetic'
-    });
+    var password;
+    if (req.body.password) {
+      password = req.body.password
+    } else {
+      password = randomstring.generate({
+        length: 12,
+        charset: 'alphabetic'
+      });
+    }
     userPool.signUp(req.body.email, password, attributeList, null, function(err, result){
         if (err) {
             res.boom.conflict(err.message, err)

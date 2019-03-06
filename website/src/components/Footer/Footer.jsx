@@ -4,53 +4,83 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
+import Button from "../CustomButtons/Button.jsx";
 // core components
 import footerStyle from "assets/jss/material-dashboard-react/components/footerStyle.jsx";
 
-function Footer({ ...props }) {
-  const { classes } = props;
-  return (
-    <footer className={classes.footer}>
-      <div className={classes.container}>
-        <div className={classes.left}>
-          <List className={classes.list}>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#home" className={classes.block}>
-                Home
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#company" className={classes.block}>
-                Company
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#portfolio" className={classes.block}>
-                Portfolio
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#blog" className={classes.block}>
-                Blog
-              </a>
-            </ListItem>
-          </List>
+import { connect } from 'react-redux'
+
+import testReducer from '../../redux/actions/TestReducer'
+
+class Footer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  triggerTestReducer = () => {
+    this.props.testReducer()
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <footer className={classes.footer}>
+        <div className={classes.container}>
+          <div className={classes.left}>
+            <List className={classes.list}>
+              <ListItem className={classes.inlineBlock}>
+                <a href="#home" className={classes.block}>
+                  Home
+                </a>
+              </ListItem>
+              <ListItem className={classes.inlineBlock}>
+                <a href="#company" className={classes.block}>
+                  Company
+                </a>
+              </ListItem>
+              <ListItem className={classes.inlineBlock}>
+                <a href="#portfolio" className={classes.block}>
+                  Portfolio
+                </a>
+              </ListItem>
+              <ListItem className={classes.inlineBlock}>
+                <a href="#blog" className={classes.block}>
+                  Blog
+                </a>
+              </ListItem>
+            </List>
+          </div>
+          <Button color="info" onClick={this.triggerTestReducer}>TestReducer</Button>
+          <p className={classes.right}>
+            <span>
+              &copy; {1900 + new Date().getYear()}{" "}
+              <a href="https://www.creative-tim.com" className={classes.a}>
+                Creative Tim
+              </a>, made with love for a better web
+            </span>
+          </p>
         </div>
-        <p className={classes.right}>
-          <span>
-            &copy; {1900 + new Date().getYear()}{" "}
-            <a href="https://www.creative-tim.com" className={classes.a}>
-              Creative Tim
-            </a>, made with love for a better web
-          </span>
-        </p>
-      </div>
-    </footer>
-  );
+      </footer>
+    );
+  }
 }
 
 Footer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(footerStyle)(Footer);
+const mapStateToProps = state => ({
+  // registerUserSuccess: state.registerUserSuccess
+})
+
+const mapDispatchToProps = dispatch => ({
+  // registerUser: registrationDetails => dispatch(registerUser(registrationDetails)),
+  // validateUser: data => dispatch(validateUser(data)),
+  testReducer: data => dispatch(testReducer(data)),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(footerStyle)(Footer))

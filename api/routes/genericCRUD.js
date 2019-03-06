@@ -24,6 +24,7 @@ genericCRUD = (req, res) => {
                         new GenericEntity(user, entity).all().then((data) => res.json(data))
                         break
                     case 'POST':
+                        console.log("POST is hit")
                         new GenericEntity(user, entity).add(req.body).then((data) => res.json(data)).catch(err => res.boom.badRequest(null, err))
                         break
                     default:

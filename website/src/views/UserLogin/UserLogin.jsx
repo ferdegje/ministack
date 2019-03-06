@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from 'react-redux'
 
 import registerUser from '../../redux/actions/RegisterUser'
+import validateUser from '../../redux/actions/ValidateUser'
+import userLogin from '../../redux/actions/UserLogin'
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -46,8 +48,19 @@ class UserLogin extends React.Component {
     }
   }
 
+  validateCode = () => {
+    this.props.validateUser({"code": this.state.validation_code})
+  }
+
+  userLogin = () => {
+    var loginDetails = {
+      "email": this.state.loginemail,
+      "password": this.state.loginpassword
+    }
+    this.props.userLogin(loginDetails)
+  }
+
   registerBtnClick = () => {
-    console.log("hello", this.state);
     let registrationDetails = {}
     for (var k in this.state) {
       if (k.replace("registration_","") !== k) {
@@ -55,6 +68,7 @@ class UserLogin extends React.Component {
       }
     }
     this.props.registerUser(registrationDetails)
+    this.setState({"waitingForCode": true})
   }
 
   inputChanged = (evt) => {
@@ -83,67 +97,54 @@ class UserLogin extends React.Component {
                 <h4 className={this.props.classes.cardTitleWhite}>Register</h4>
                 <p className={this.props.classes.cardCategoryWhite}>Create your account</p>
               </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <CustomInput
-                      labelText="Email address"
-                      id="registration_email"
-                      inputProps={this.inputProps}
-                      formControlProps={{
-                        fullWidth: true
-                      }}
+                  <CardBody>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={12}>
+                        <CustomInput
+                          labelText="Email address"
+                          id="registration_email"
+                          inputProps={this.inputProps}
+                          formControlProps={{
+                            fullWidth: true
+                          }}
+                          
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12} md={4}>
+                        <CustomInput
+                          labelText="Password"
+                          id="registration_password"
+                          inputProps={this.inputProps}
+                          formControlProps={{
+                            fullWidth: true
+                          }}
+                        />
+                      </GridItem>
+                      { this.state.waitingForCode?(
+                        <GridItem xs={12} sm={12} md={8}>
+                        <CustomInput
+                          labelText="Validation code"
+                          id="validation_code"
+                          inputProps={this.inputProps}
+                          formControlProps={{
+                            fullWidth: true
+                          }}
+                        />
+                      </GridItem>
+                      ):(<GridItem></GridItem>)}
                       
-                    />
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="First Name"
-                      id="registration_first-name"
-                      inputProps={this.inputProps}
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="Last Name"
-                      id="registration_last-name"
-                      inputProps={this.inputProps}
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Password"
-                      id="registration_password"
-                      inputProps={this.inputProps}
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={8}>
-                    <CustomInput
-                      labelText="Personal quote"
-                      id="registration_personal-quote"
-                      inputProps={this.inputProps}
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer>
-              </CardBody>
+                    </GridContainer>
+                </CardBody>
+                
               <CardFooter>
-                <Button color="primary" onClick={this.registerBtnClick}>Create Account</Button>
+                {this.state.waitingForCode? (
+                  <Button color="primary" onClick={this.validateCode}>Validate code</Button>
+                ):(
+                  <Button color="primary" onClick={this.registerBtnClick}>Create Account</Button>
+                )}
+                
               </CardFooter>
             </Card>
           </GridItem>
@@ -158,7 +159,8 @@ class UserLogin extends React.Component {
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText="Email address"
-                      id="email-address"
+                      id="loginemail"
+                      inputProps={this.inputProps}
                       formControlProps={{
                         fullWidth: true
                       }}
@@ -170,7 +172,8 @@ class UserLogin extends React.Component {
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText="Password"
-                      id="password"
+                      id="loginpassword"
+                      inputProps={this.inputProps}
                       formControlProps={{
                         fullWidth: true
                       }}
@@ -180,7 +183,7 @@ class UserLogin extends React.Component {
                 </GridContainer>
               </CardBody>
               <CardFooter>
-                <Button color="info">Log in</Button>
+                <Button color="info" onClick={this.userLogin}>Log in</Button>
               </CardFooter>
             </Card>
           </GridItem>
@@ -191,10 +194,13 @@ class UserLogin extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  registerUserSuccess: state.registerUserSuccess
 })
 
 const mapDispatchToProps = dispatch => ({
-  registerUser: registrationDetails => dispatch(registerUser(registrationDetails))
+  registerUser: registrationDetails => dispatch(registerUser(registrationDetails)),
+  validateUser: data => dispatch(validateUser(data)),
+  userLogin: data => dispatch(userLogin(data)),
 })
 
 export default connect(

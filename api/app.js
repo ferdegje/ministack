@@ -45,8 +45,18 @@ router.use(awsServerlessExpressMiddleware.eventContext())
 // NOTE: tests can't find the views directory without this
 app.set('views', path.join(__dirname, 'views'))
 
-router.get('/ping', (req, res) => {
-  res.json("pong")
+router.get('/pinglambda', (req, res, callback) => {
+  const response = {
+    statusCode: 200,
+    // HERE'S THE CRITICAL PART
+    headers: {
+      "Access-Control-Allow-Origin" : "*" // Required for CORS support to work
+    },
+    body: JSON.stringify({ "message": "Hello World!" })
+  };
+
+  callback(null, response);
+  // res.json("pong")
 })
 router.get('/mediauploadlink', mediaUploadLink)
 router.post('/register', register)
@@ -60,6 +70,11 @@ router.all('/:entityName([a-zA-Z0-9]+)/:objectId([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f
 // The aws-serverless-express library creates a server and listens on a Unix
 // Domain Socket for you, so you can remove the usual call to app.listen.
 // app.listen(3000)
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use('/', router)
 
 // Export your express server so you can import it in the lambda function.

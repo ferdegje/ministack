@@ -1,8 +1,7 @@
 const initialState = {
-    initialised: true,
 }
   
 export default function ReducerInit(state=initialState, action) {
-    console.debug("Reducers", state, action)
+    console.debug("Reducer "+action.type, state, action)
     return state
 }
