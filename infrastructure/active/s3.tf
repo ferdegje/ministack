@@ -14,16 +14,16 @@ resource "aws_s3_bucket" "www" {
 }
 
 output "www" {
-  value = "${aws_s3_bucket.www.bucket}"
+  value = aws_s3_bucket.www.bucket
 }
 
 resource "aws_s3_bucket_policy" "default" {
-  bucket = "${aws_s3_bucket.www.id}"
-  policy = "${data.aws_iam_policy_document.default.json}"
+  bucket = aws_s3_bucket.www.id
+  policy = data.aws_iam_policy_document.default.json
 }
 
 data "aws_iam_policy_document" "default" {
-  statement = [{
+  statement {
     actions = ["s3:GetObject"]
 
     resources = ["${aws_s3_bucket.www.arn}/*"]
@@ -32,35 +32,25 @@ data "aws_iam_policy_document" "default" {
       type        = "AWS"
       identifiers = ["*"]
     }
-  }]
+  }
 }
 
 # resource "aws_s3_bucket" "project-user-media" {
 #   bucket = "${local.project}-user-media"
 #   acl    = "private"
-
-
 #   lifecycle_rule {
 #     id      = "users"
 #     enabled = true
-
-
 #     prefix = "users/"
-
-
 #     tags = {
 #         "rule"      = "users"
 #         "autoclean" = "true"
 #     }
-
-
 #     transition {
 #         days          = 30
 #         storage_class = "STANDARD_IA" # or "ONEZONE_IA"
 #     }
 #   }
-
-
 #   server_side_encryption_configuration {
 #     rule {
 #       apply_server_side_encryption_by_default {
@@ -69,11 +59,8 @@ data "aws_iam_policy_document" "default" {
 #       }
 #     }
 #   }
-
-
 #   tags = {
 #     Name        = "${local.project} Users Media"
 #     Project     = "${local.projectLongName}"
 #   }
 # }
-

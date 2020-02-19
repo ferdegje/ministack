@@ -20,6 +20,7 @@ schema {
     mutation: Mutation
 }
 EOF
+
 }
 
 resource "aws_iam_role" "example" {
@@ -39,11 +40,12 @@ resource "aws_iam_role" "example" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "example" {
   name = "example"
-  role = "${aws_iam_role.example.id}"
+  role = aws_iam_role.example.id
 
   policy = <<EOF
 {
@@ -61,38 +63,17 @@ resource "aws_iam_role_policy" "example" {
   ]
 }
 EOF
+
 }
 
 resource "aws_appsync_datasource" "example" {
-  api_id           = "${aws_appsync_graphql_api.test.id}"
+  api_id           = aws_appsync_graphql_api.test.id
   name             = "tf_appsync_example"
-  service_role_arn = "${aws_iam_role.example.arn}"
+  service_role_arn = aws_iam_role.example.arn
   type             = "AMAZON_DYNAMODB"
 
   dynamodb_config {
-    table_name = "${aws_dynamodb_table.article.name}"
+    table_name = aws_dynamodb_table.article.name
   }
 }
 
-resource "aws_appsync_function" "test" {
-  api_id      = "${aws_appsync_graphql_api.test.id}"
-  data_source = "${aws_appsync_datasource.test.name}"
-  name        = "tf_example"
-  request_mapping_template = <<EOF
-{
-    "version": "2018-05-29",
-    "method": "GET",
-    "resourcePath": "/",
-    "params":{
-        "headers": $utils.http.copyheaders($ctx.request.headers)
-    }
-}
-EOF
-  response_mapping_template = <<EOF
-#if($ctx.result.statusCode == 200)
-    $ctx.result.body
-#else
-    $utils.appendError($ctx.result.body, $ctx.result.statusCode)
-#end
-EOF
-}

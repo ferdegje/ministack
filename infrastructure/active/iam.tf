@@ -16,6 +16,7 @@ resource "aws_iam_role" "iam_for_lambda" {
   ]
 }
 EOF
+
 }
 
 # See also the following AWS managed policy: AWSLambdaBasicExecutionRole
@@ -39,11 +40,12 @@ resource "aws_iam_policy" "lambda_logging" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
-  role       = "${aws_iam_role.iam_for_lambda.name}"
-  policy_arn = "${aws_iam_policy.lambda_logging.arn}"
+  role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = aws_iam_policy.lambda_logging.arn
 }
 
 resource "aws_iam_policy" "lambda_dynamo" {
@@ -65,9 +67,11 @@ resource "aws_iam_policy" "lambda_dynamo" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_dynamo" {
-  role       = "${aws_iam_role.iam_for_lambda.name}"
-  policy_arn = "${aws_iam_policy.lambda_dynamo.arn}"
+  role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = aws_iam_policy.lambda_dynamo.arn
 }
+

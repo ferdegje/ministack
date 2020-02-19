@@ -23,6 +23,7 @@ resource "aws_dynamodb_table" "article" {
   }
 
   tags = {
-    Project = "${local.projectLongName}"
+    Project = local.projectLongName
   }
 }
+

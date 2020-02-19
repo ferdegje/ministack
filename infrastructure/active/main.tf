@@ -25,7 +25,7 @@ locals {
 }
 
 output "projectName" {
-  value = "${local.project}"
+  value = local.project
 }
 
 data "aws_route53_zone" "primary" {
@@ -33,7 +33,7 @@ data "aws_route53_zone" "primary" {
 }
 
 resource "aws_api_gateway_account" "demo" {
-  cloudwatch_role_arn = "${aws_iam_role.cloudwatch.arn}"
+  cloudwatch_role_arn = aws_iam_role.cloudwatch.arn
 }
 
 resource "aws_iam_role" "cloudwatch" {
@@ -54,11 +54,12 @@ resource "aws_iam_role" "cloudwatch" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "cloudwatch" {
   name = "Role-Policy-CloudWatch-API-GW-${local.project}"
-  role = "${aws_iam_role.cloudwatch.id}"
+  role = aws_iam_role.cloudwatch.id
 
   policy = <<EOF
 {
@@ -80,4 +81,6 @@ resource "aws_iam_role_policy" "cloudwatch" {
     ]
 }
 EOF
+
 }
+

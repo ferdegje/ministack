@@ -1,5 +1,5 @@
 resource "aws_cognito_user_pool" "pool" {
-  name = "${local.projectLongName}"
+  name = local.projectLongName
 
   auto_verified_attributes = ["email"]
   username_attributes      = ["email"]
@@ -20,14 +20,15 @@ resource "aws_cognito_user_pool" "pool" {
 resource "aws_cognito_user_pool_client" "client" {
   name = "web"
 
-  user_pool_id        = "${aws_cognito_user_pool.pool.id}"
+  user_pool_id        = aws_cognito_user_pool.pool.id
   explicit_auth_flows = ["USER_PASSWORD_AUTH"]
 }
 
 output "aws_cognito_user_pool_client_id" {
-  value = "${aws_cognito_user_pool_client.client.id}"
+  value = aws_cognito_user_pool_client.client.id
 }
 
 output "aws_cognito_user_pool_id" {
-  value = "${aws_cognito_user_pool.pool.id}"
+  value = aws_cognito_user_pool.pool.id
 }
+
