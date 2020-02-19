@@ -7,3 +7,4 @@ resource "aws_s3_bucket" "www" {
     error_document = "error.html"
   }
 }
+
