@@ -11,7 +11,7 @@ resource "aws_lambda_function" "example" {
   role             = "${aws_iam_role.iam_for_lambda.arn}"
   handler          = "lambda.handler"
   source_code_hash = "${base64sha256(file("../../api/lambda_function_payload.zip"))}"
-  runtime          = "nodejs8.10"
+  runtime          = "nodejs12.x"
   timeout          = 4
   memory_size      = 3008
 
