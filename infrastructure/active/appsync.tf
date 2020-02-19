@@ -24,7 +24,7 @@ EOF
 
 resource "aws_appsync_datasource" "test" {
   api_id      = "${aws_appsync_graphql_api.test.id}"
-  name        = "tf-example"
+  name        = "ex"
   type        = "HTTP"
 
   http_config {
