@@ -1,253 +1,79 @@
-# [Material Dashboard React](https://demos.creative-tim.com/material-dashboard-react/#/dashboard) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fcreativetimofficial.github.io%2Fmaterial-dashboard-react&text=Material%20Dashboard%20React%20-%20Free%20Bootstrap%20Admin%20Template&original_referer=https%3A%2F%2Fdemos.creative-tim.com%2Fmaterial-dashboard-react%2F%3F_ga%3D2.10428917.198078103.1532329372-1803433978.1528781151&via=creativetim&hashtags=react%2Cmaterial-ui)
+# Introduction
+
+This is a Starter React application for using the Sample app in the AWS AppSync console when building your GraphQL API. The Sample app creates a GraphQL schema and provisions Amazon DynamoDB resources, then connects them appropriately with Resolvers. The application demonstrates GraphQL Mutations, Queries and Subscriptions using AWS AppSync. You can use this for learning purposes or adapt either the application or the GraphQL Schema to meet your needs.
+
+![EventDetails](media/AllEvents.png)
+![EventDetails](media/CreateEvent.png)
+
+## Features
+
+- GraphQL Mutations
+  - Create new events
+  - Create comments on existing events
+
+- GraphQL Queries
+  - Get all events
+  - Get an event by Id
+
+- GraphQL Subscriptions
+  - Real time updates for comments on an event
+
+- Authorization
+  - The app uses API Key as the authorization mechanism
+
+## AWS Setup
+
+1. Navigate to the AWS AppSync console using the URL: http://console.aws.amazon.com/appsync/home
+
+2. Click on `Create API` and select the `Event App` under the `sample project` in the bottom pane, and select `Start`. Enter a API name of your choice. Click `Create`.
 
 
+## React Setup
 
-![version](https://img.shields.io/badge/version-1.5.0-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/material-dashboard-react.svg?maxAge=2592000)]() [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/material-dashboard-react.svg?maxAge=2592000)]() [![Join the chat at https://gitter.im/NIT-dgp/General](https://badges.gitter.im/NIT-dgp/General.svg)](https://gitter.im/creative-tim/material-dashboard?utm_source=share-link&utm_medium=link&utm_campaign=share-link) [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/E4aHAQy)
-
-![Product Gif](src/assets/github/md-react.gif)
-
-Material Dashboard React is a free Material-UI Admin with a fresh, new design inspired by Google's Material Design. We are very excited to introduce our take on the material concepts through an easy to use and beautiful set of components. Material Dashboard React was built over the popular Material-UI framework.
-
-Material Dashboard React makes use of light, surface and movement. The general layout resembles sheets of paper following multiple different layers, so that the depth and order is obvious. The navigation stays mainly on the left sidebar and the content is on the right inside the main panel.
-
-Material Dashboard React comes with 5 color filter choices for both the sidebar and the card headers (blue, green, orange, red and purple) and an option to have a background image on the sidebar.
-
-Material Dashboard React was created using [create-react-app](https://github.com/facebook/create-react-app) and it uses a framework built by our friend [Olivier - Material-UI v3.1.0](https://github.com/mui-org/material-ui), who did an amazing job creating the backbone for the material effects, animations, ripples and transitions. Big thanks to his team for the effort and forward thinking they put into it.
-
-Special thanks go to:
-+ [React-chartist](https://github.com/fraserxu/react-chartist) for the wonderful charts.
-
-We are very excited to share this dashboard with you and we look forward to hearing your feedback!
-
-You can find the Github Repo here.
-
-## Table of Contents
-
-* [Versions](#versions)
-* [Demo](#demo)
-* [Quick Start](#quick-start)
-* [Documentation](#documentation)
-* [File Structure](#file-structure)
-* [Browser Support](#browser-support)
-* [Resources](#resources)
-* [Reporting Issues](#reporting-issues)
-* [Technical Support or Questions](#technical-support-or-questions)
-* [Licensing](#licensing)
-* [Useful Links](#useful-links)
-
-
-## Versions
-
-[<img src="src/assets/github/html.png" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard)
-[<img src="src/assets/github/react.svg" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard-react)
-[<img src="src/assets/github/vuejs.png" width="60" height="60" />](https://www.creative-tim.com/product/vue-material-dashboard)
-[<img src="src/assets/github/angular.png" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard-angular2)
-
-
-| HTML | React | Vue | Angular |
-| --- | --- | --- | --- |
-| [![Material Dashboard HTML](src/assets/github/opt_md_thumbnail.jpg)](https://www.creative-tim.com/product/material-dashboard) | [![Material Dashboard React](src/assets/github/opt_mdr_thumbnail.jpg)](https://www.creative-tim.com/product/material-dashboard-react) | [![Vue Material Dashboard ](src/assets/github/opt_md_vue_thumbnail.jpg)](https://www.creative-tim.com/product/vue-material-dashboard) | [![Material Dashboard Angular](src/assets/github/opt_md_angular_thumbnail.jpg)](https://www.creative-tim.com/product/material-dashboard-angular2)
-
-## Demo
-
-| Dashboard | User Profile | Tables | Maps | Notification |
-| --- | --- | --- | --- | --- |
-| [![Start page](src/assets/github/dashboard.png)](https://demos.creative-tim.com/material-dashboard-react/#/dashboard) | [![User profile page](src/assets/github/user_profile.png)](https://demos.creative-tim.com/material-dashboard-react/#/user) | [![Tables page ](src/assets/github/tables.png)](https://demos.creative-tim.com/material-dashboard-react/#/table) | [![Maps Page](src/assets/github/maps.png)](https://demos.creative-tim.com/material-dashboard-react/#/maps) | [![Notification page](src/assets/github/notification.png)](https://demos.creative-tim.com/material-dashboard-react/#/notifications)
-
-[View More](https://demos.creative-tim.com/material-dashboard-react/#/dashboard).
-
-
-## Quick start
-
-Quick start options:
-
-- `npm i material-dashboard-react`
-- Clone the repo: `git clone https://github.com/creativetimofficial/material-dashboard-react.git`.
-- [Download from Github](https://github.com/creativetimofficial/material-dashboard-react/archive/master.zip).
-- [Download from Creative Tim](https://www.creative-tim.com/product/material-dashboard-react).
-
-
-## Documentation
-The documentation for the Material Dashboard React is hosted at our [website](https://demos.creative-tim.com/material-dashboard-react/#/documentation/tutorial).
-
-
-## File Structure
-
-Within the download you'll find the following directories and files:
+First, clone this repo:
 
 ```
-material-dashboard-react
-.
-├── CHANGELOG.md
-├── LICENSE.md
-├── README.md
-├── documentation
-│   ├── assets
-│   │   ├── css
-│   │   ├── img
-│   │   │   └── faces
-│   │   └── js
-│   └── tutorial-components.html
-├── package.json
-├── public
-│   ├── favicon.ico
-│   ├── index.html
-│   └── manifest.json
-└── src
-    ├── assets
-    │   ├── css
-    │   │   └── material-dashboard-react.css
-    │   ├── github
-    │   ├── img
-    │   │   └── faces
-    │   └── jss
-    │       ├── material-dashboard-react
-    │       │   ├── cardImagesStyles.jsx
-    │       │   ├── checkboxAdnRadioStyle.jsx
-    │       │   ├── components
-    │       │   │   ├── buttonStyle.jsx
-    │       │   │   ├── cardAvatarStyle.jsx
-    │       │   │   ├── cardBodyStyle.jsx
-    │       │   │   ├── cardFooterStyle.jsx
-    │       │   │   ├── cardHeaderStyle.jsx
-    │       │   │   ├── cardIconStyle.jsx
-    │       │   │   ├── cardStyle.jsx
-    │       │   │   ├── customInputStyle.jsx
-    │       │   │   ├── customTabsStyle.jsx
-    │       │   │   ├── footerStyle.jsx
-    │       │   │   ├── headerLinksStyle.jsx
-    │       │   │   ├── headerStyle.jsx
-    │       │   │   ├── sidebarStyle.jsx
-    │       │   │   ├── snackbarContentStyle.jsx
-    │       │   │   ├── tableStyle.jsx
-    │       │   │   ├── tasksStyle.jsx
-    │       │   │   └── typographyStyle.jsx
-    │       │   ├── dropdownStyle.jsx
-    │       │   ├── layouts
-    │       │   │   └── dashboardStyle.jsx
-    │       │   ├── tooltipStyle.jsx
-    │       │   └── views
-    │       │       ├── dashboardStyle.jsx
-    │       │       └── iconsStyle.jsx
-    │       └── material-dashboard-react.jsx
-    ├── components
-    │   ├── Card
-    │   │   ├── Card.jsx
-    │   │   ├── CardAvatar.jsx
-    │   │   ├── CardBody.jsx
-    │   │   ├── CardFooter.jsx
-    │   │   ├── CardHeader.jsx
-    │   │   └── CardIcon.jsx
-    │   ├── CustomButtons
-    │   │   └── Button.jsx
-    │   ├── CustomInput
-    │   │   └── CustomInput.jsx
-    │   ├── CustomTabs
-    │   │   └── CustomTabs.jsx
-    │   ├── Footer
-    │   │   └── Footer.jsx
-    │   ├── Grid
-    │   │   └── GridItem.jsx
-    │   ├── Header
-    │   │   ├── Header.jsx
-    │   │   └── HeaderLinks.jsx
-    │   ├── Sidebar
-    │   │   └── Sidebar.jsx
-    │   ├── Snackbar
-    │   │   ├── Snackbar.jsx
-    │   │   └── SnackbarContent.jsx
-    │   ├── Table
-    │   │   └── Table.jsx
-    │   ├── Tasks
-    │   │   └── Tasks.jsx
-    │   └── Typography
-    │       ├── Danger.jsx
-    │       ├── Info.jsx
-    │       ├── Muted.jsx
-    │       ├── Primary.jsx
-    │       ├── Quote.jsx
-    │       ├── Success.jsx
-    │       └── Warning.jsx
-    ├── index.js
-    ├── layouts
-    │   └── Dashboard
-    │       └── Dashboard.jsx
-    ├── logo.svg
-    ├── routes
-    │   ├── dashboard.jsx
-    │   └── index.jsx
-    ├── variables
-    │   ├── charts.jsx
-    │   └── general.jsx
-    └── views
-        ├── Dashboard
-        │   └── Dashboard.jsx
-        ├── Icons
-        │   └── Icons.jsx
-        ├── Maps
-        │   └── Maps.jsx
-        ├── Notifications
-        │   └── Notifications.jsx
-        ├── TableList
-        │   └── TableList.jsx
-        ├── Typography
-        │   └── Typography.jsx
-        ├── UpgradeToPro
-        │   └── UpgradeToPro.jsx
-        └── UserProfile
-            └── UserProfile.jsx
+git clone https://github.com/aws-samples/aws-mobile-appsync-events-starter-react.git
+cd ./aws-mobile-appsync-events-starter-react
 ```
 
-## Browser Support
+Wait until the progress bar at the top has completed deploying your resources. Then from the integration page of your GraphQL API (you can click the name you entered in the left hand navigation). 
 
-At present, we officially aim to support the last two versions of the following browsers:
+On this same page, select `JavaScript` at the bottom to download your `aws-exports.js` configuration file by clicking the **Download Config** button. Replace the `aws-exports.js` file in the root of your app with the file you just downloaded.
 
-<img src="src/assets/github/chrome.png" width="64" height="64"> <img src="src/assets/github/firefox.png" width="64" height="64"> <img src="src/assets/github/edge.png" width="64" height="64"> <img src="src/assets/github/safari.png" width="64" height="64"> <img src="src/assets/github/opera.png" width="64" height="64">
+Start the application:
+
+```
+npm
+npm run start
+```
+
+## Application Walkthrough
+
+### ./src/App.js
+
+- Sets up the application navigation between screens using `BrowserRouter` from React Router.
+- Configures the `AWSAppSyncClient` using an API Key. This can be confugured to use Amazon Cognito Identity or Amazon Cognito User Pools as well.
 
 
-## Resources
-- Demo: https://demos.creative-tim.com/material-dashboard-react
-- Download Page: https://www.creative-tim.com/product/material-dashboard-react
-- Documentation: https://demos.creative-tim.com/material-dashboard-react/#/documentation/tutorial
-- License Agreement: https://www.creative-tim.com/license
-- Support: https://www.creative-tim.com/contact-us
-- Issues: [Github Issues Page](https://github.com/creativetimofficial/material-dashboard-react/issues)
-- [Material Kit React - For Front End Development](https://www.creative-tim.com/product/material-kit-react?ref=github-mdr-free)
+### ./Components/AllEvents.js
 
-## Reporting Issues
-We use GitHub Issues as the official bug tracker for the Material Dashboard React. Here are some advices for our users that want to report an issue:
+- Uses Higher Order Components for making GraphQL calls to AWS AppSync.
+- View to display all the events from `./GraphQL/QueryAllEvents.js`
+- Allows you to delete individual events. This will use `./GraphQL/MutationDeleteEvent.js`
 
-1. Make sure that you are using the latest version of the Material Dashboard React. Check the CHANGELOG from your dashboard on our [website](https://www.creative-tim.com/).
-2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
-3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
+### ./Components/NewEvent.js
 
-## Technical Support or Questions
+- Uses Higher Order Components for making GraphQL calls to AWS AppSync.
+- View to create a new event using `./GraphQL/MutationCreateEvent.js`
 
-If you have questions or need help integrating the product please [contact us](https://www.creative-tim.com/contact-us) instead of opening an issue.
+### ./Components/ViewEvent.js and EventComment.js
 
-## Licensing
+- Uses Higher Order Components for making GraphQL calls to AWS AppSync.
+- `ViewEvent` gets all the comments for a specific event when page loads with a GraphQL query defined in `./GraphQL/QueryGetEvent`
+- Once the page loads, `EventComments` sets up a GraphQL subscription using `./GraphQL/SubscriptionEventComments` to display any new comments on an event in realtime.
 
-- Copyright 2018 Creative Tim (https://www.creative-tim.com)
-- Licensed under MIT (https://github.com/creativetimofficial/material-dashboard-react/blob/master/LICENSE.md)
+### ./GraphQL Directory
 
-## Useful Links
+- Contains GraphQL queries and mutations for interacting with AWS AppSync.
 
-More products from Creative Tim: <https://www.creative-tim.com/products>
-
-Tutorials: <https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w>
-
-Freebies: <https://www.creative-tim.com/products>
-
-Affiliate Program (earn money): <https://www.creative-tim.com/affiliates/new>
-
-Social Media:
-
-Twitter: <https://twitter.com/CreativeTim>
-
-Facebook: <https://www.facebook.com/CreativeTim>
-
-Dribbble: <https://dribbble.com/creativetim>
-
-Google+: <https://plus.google.com/+CreativetimPage>
-
-Instagram: <https://instagram.com/creativetimofficial>
