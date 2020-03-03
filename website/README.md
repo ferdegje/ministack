@@ -1,79 +1,68 @@
-# Introduction
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This is a Starter React application for using the Sample app in the AWS AppSync console when building your GraphQL API. The Sample app creates a GraphQL schema and provisions Amazon DynamoDB resources, then connects them appropriately with Resolvers. The application demonstrates GraphQL Mutations, Queries and Subscriptions using AWS AppSync. You can use this for learning purposes or adapt either the application or the GraphQL Schema to meet your needs.
+## Available Scripts
 
-![EventDetails](media/AllEvents.png)
-![EventDetails](media/CreateEvent.png)
+In the project directory, you can run:
 
-## Features
+### `npm start`
 
-- GraphQL Mutations
-  - Create new events
-  - Create comments on existing events
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-- GraphQL Queries
-  - Get all events
-  - Get an event by Id
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-- GraphQL Subscriptions
-  - Real time updates for comments on an event
+### `npm test`
 
-- Authorization
-  - The app uses API Key as the authorization mechanism
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## AWS Setup
+### `npm run build`
 
-1. Navigate to the AWS AppSync console using the URL: http://console.aws.amazon.com/appsync/home
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-2. Click on `Create API` and select the `Event App` under the `sample project` in the bottom pane, and select `Start`. Enter a API name of your choice. Click `Create`.
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## React Setup
+### `npm run eject`
 
-First, clone this repo:
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-```
-git clone https://github.com/aws-samples/aws-mobile-appsync-events-starter-react.git
-cd ./aws-mobile-appsync-events-starter-react
-```
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Wait until the progress bar at the top has completed deploying your resources. Then from the integration page of your GraphQL API (you can click the name you entered in the left hand navigation). 
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-On this same page, select `JavaScript` at the bottom to download your `aws-exports.js` configuration file by clicking the **Download Config** button. Replace the `aws-exports.js` file in the root of your app with the file you just downloaded.
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-Start the application:
+## Learn More
 
-```
-npm
-npm run start
-```
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-## Application Walkthrough
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-### ./src/App.js
+### Code Splitting
 
-- Sets up the application navigation between screens using `BrowserRouter` from React Router.
-- Configures the `AWSAppSyncClient` using an API Key. This can be confugured to use Amazon Cognito Identity or Amazon Cognito User Pools as well.
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
+### Analyzing the Bundle Size
 
-### ./Components/AllEvents.js
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-- Uses Higher Order Components for making GraphQL calls to AWS AppSync.
-- View to display all the events from `./GraphQL/QueryAllEvents.js`
-- Allows you to delete individual events. This will use `./GraphQL/MutationDeleteEvent.js`
+### Making a Progressive Web App
 
-### ./Components/NewEvent.js
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-- Uses Higher Order Components for making GraphQL calls to AWS AppSync.
-- View to create a new event using `./GraphQL/MutationCreateEvent.js`
+### Advanced Configuration
 
-### ./Components/ViewEvent.js and EventComment.js
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-- Uses Higher Order Components for making GraphQL calls to AWS AppSync.
-- `ViewEvent` gets all the comments for a specific event when page loads with a GraphQL query defined in `./GraphQL/QueryGetEvent`
-- Once the page loads, `EventComments` sets up a GraphQL subscription using `./GraphQL/SubscriptionEventComments` to display any new comments on an event in realtime.
+### Deployment
 
-### ./GraphQL Directory
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-- Contains GraphQL queries and mutations for interacting with AWS AppSync.
+### `npm run build` fails to minify
 
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
