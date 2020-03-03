@@ -2,3 +2,4 @@ lambda_function_payload.zip
 infrastructure.json
 **/node_modules/*
 **/.terraform/*
+**/*.icloud
