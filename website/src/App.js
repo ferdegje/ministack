@@ -2,6 +2,12 @@ import React from 'react';
 import logo from './logo.svg';
 import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/react-hooks';
+import NavBar from "./components/NavBar";
+import { Router, Route, Switch } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
+import { useAuth0 } from "./react-auth0-spa";
+import Profile from "./components/Profile";
+import history from "./utils/history";
 
 import './App.css';
 
@@ -30,23 +36,26 @@ function ExchangeRates() {
 }
 
 function App() {
+  const { loading } = useAuth0();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <ExchangeRates />
-        <p>
-          Edit the code from <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router history={history}>
+        <header className="App-header">
+          <NavBar />
+          <img src={logo} className="App-logo" alt="logo" />
+          
+          <Switch>
+            <Route path="/" exact />
+            <PrivateRoute path="/profile" component={Profile} />
+          </Switch>
+          <ExchangeRates />
+        </header>
+      </Router>
     </div>
   );
 }
