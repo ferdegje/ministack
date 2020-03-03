@@ -2,22 +2,109 @@ resource "aws_appsync_graphql_api" "test" {
   authentication_type = "API_KEY"
   name                = "tf-example"
   schema              = <<EOF
-type Mutation {
-    putPost(id: ID!, title: String!): Post
+input CreateMinistackArticleInput {
+	id: String!
+	title: String!
 }
 
-type Post {
-    id: ID!
-    title: String!
+input DeleteMinistackArticleInput {
+	id: String!
+	title: String!
+}
+
+type MinistackArticle {
+	id: String!
+	title: String!
+}
+
+type MinistackArticleConnection {
+	items: [MinistackArticle]
+	nextToken: String
+}
+
+type Mutation {
+	createMinistackArticle(input: CreateMinistackArticleInput!): MinistackArticle
+	updateMinistackArticle(input: UpdateMinistackArticleInput!): MinistackArticle
+	deleteMinistackArticle(input: DeleteMinistackArticleInput!): MinistackArticle
 }
 
 type Query {
-    singlePost(id: ID!): Post
+	getMinistackArticle(id: String!, title: String!): MinistackArticle
+	listMinistackArticles(filter: TableMinistackArticleFilterInput, limit: Int, nextToken: String): MinistackArticleConnection
 }
 
-schema {
-    query: Query
-    mutation: Mutation
+type Subscription {
+	onCreateMinistackArticle(id: String, title: String): MinistackArticle
+		@aws_subscribe(mutations: ["createMinistackArticle"])
+	onUpdateMinistackArticle(id: String, title: String): MinistackArticle
+		@aws_subscribe(mutations: ["updateMinistackArticle"])
+	onDeleteMinistackArticle(id: String, title: String): MinistackArticle
+		@aws_subscribe(mutations: ["deleteMinistackArticle"])
+}
+
+input TableBooleanFilterInput {
+	ne: Boolean
+	eq: Boolean
+}
+
+input TableFloatFilterInput {
+	ne: Float
+	eq: Float
+	le: Float
+	lt: Float
+	ge: Float
+	gt: Float
+	contains: Float
+	notContains: Float
+	between: [Float]
+}
+
+input TableIDFilterInput {
+	ne: ID
+	eq: ID
+	le: ID
+	lt: ID
+	ge: ID
+	gt: ID
+	contains: ID
+	notContains: ID
+	between: [ID]
+	beginsWith: ID
+}
+
+input TableIntFilterInput {
+	ne: Int
+	eq: Int
+	le: Int
+	lt: Int
+	ge: Int
+	gt: Int
+	contains: Int
+	notContains: Int
+	between: [Int]
+}
+
+input TableMinistackArticleFilterInput {
+	id: TableStringFilterInput
+	title: TableStringFilterInput
+}
+
+input TableStringFilterInput {
+	ne: String
+	eq: String
+	le: String
+	lt: String
+	ge: String
+	gt: String
+	contains: String
+	notContains: String
+	between: [String]
+	beginsWith: String
+}
+
+input UpdateMinistackArticleInput {
+	id: String!
+	title: String!
 }
 EOF
 
@@ -68,7 +155,7 @@ EOF
 
 resource "aws_appsync_datasource" "example" {
   api_id           = aws_appsync_graphql_api.test.id
-  name             = "tf_appsync_example"
+  name             = "ministack_article"
   service_role_arn = aws_iam_role.example.arn
   type             = "AMAZON_DYNAMODB"
 
