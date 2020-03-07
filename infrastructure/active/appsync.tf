@@ -153,6 +153,10 @@ EOF
 
 }
 
+output "aws_appsync_graphql_api_uris" {
+	value = aws_appsync_graphql_api.test.uris
+}
+
 resource "aws_appsync_datasource" "example" {
   api_id           = aws_appsync_graphql_api.test.id
   name             = "ministack_article"
