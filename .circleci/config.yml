@@ -43,6 +43,7 @@ jobs:
             pushd infrastructure/active
             /tmp/terraform/terraform init
             /tmp/terraform/terraform apply --auto-approve
+            terraform output -json > /tmp/terraform.output.json
             /tmp/terraform/terraform output > /tmp/terraform.output
             cat /tmp/terraform.output
             popd
@@ -58,6 +59,7 @@ jobs:
           name: Build website
           command: |
             pushd website
+            cp /tmp/terraform.output.json ./src/infrastructure.json
             npm install
             npm run build
             popd
