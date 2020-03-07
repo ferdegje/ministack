@@ -16,6 +16,7 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
+    "getinfra": "pushd ../infrastructure/active/ && terraform output -json > ../../website/src/infrastructure.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
