@@ -43,7 +43,7 @@ jobs:
             pushd infrastructure/active
             /tmp/terraform/terraform init
             /tmp/terraform/terraform apply --auto-approve
-            terraform output -json > /tmp/terraform.output.json
+            /tmp/terraform/terraform output -json > /tmp/terraform.output.json
             /tmp/terraform/terraform output > /tmp/terraform.output
             cat /tmp/terraform.output
             popd
