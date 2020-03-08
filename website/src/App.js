@@ -7,7 +7,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import { useAuth0 } from "./react-auth0-spa";
 import Profile from "./components/Profile";
-import ListPosts from "./components/ListPosts";
+import MonComposant from "./components/ListPosts";
 import history from "./utils/history";
 
 import './App.css';
@@ -53,7 +53,7 @@ function App() {
           <Switch>
             <Route path="/" exact />
             <PrivateRoute path="/profile" component={Profile} />
-            <PrivateRoute path="/list" component={ListPosts} />
+            <Route path="/list" component={MonComposant} />
           </Switch>
           {/* <ExchangeRates /> */}
         </header>

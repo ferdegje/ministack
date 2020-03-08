@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-// import { gql } from "graphql-tag";
 import { ApolloProvider } from '@apollo/react-hooks';
 import { Auth0Provider } from "./react-auth0-spa";
 import config from "./auth_config.json";
@@ -56,18 +55,3 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
-// client
-//   .query({
-//     query: gql`
-//       query listMinistackArticles {
-//         listMinistackArticles {
-//           items {
-//             id,
-//             title      
-//           }
-//         }
-//       }
-//     `
-//   })
-//   .then(result => console.log(result));
