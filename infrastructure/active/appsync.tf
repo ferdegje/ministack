@@ -157,6 +157,19 @@ output "aws_appsync_graphql_api_uris" {
 	value = aws_appsync_graphql_api.test.uris
 }
 
+output "aws_appsync_graphql_api_api_key" {
+	value = aws_appsync_api_key.test.key
+}
+
+output "aws_appsync_graphql_api_authentication_type" {
+	value = aws_appsync_graphql_api.test.authentication_type
+}
+
+resource "aws_appsync_api_key" "test" {
+  api_id  = aws_appsync_graphql_api.test.id
+  expires = timeadd(timestamp(), "8760h")
+}
+
 resource "aws_appsync_datasource" "example" {
   api_id           = aws_appsync_graphql_api.test.id
   name             = "ministack_article"

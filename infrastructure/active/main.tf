@@ -24,6 +24,10 @@ locals {
   projectLongName = "Ministack demo"
 }
 
+output "region" {
+  value = local.region
+}
+
 output "projectName" {
   value = local.project
 }

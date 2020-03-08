@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ApolloClient from 'apollo-boost';
-import { gql } from "apollo-boost";
+// import { gql } from "graphql-tag";
 import { ApolloProvider } from '@apollo/react-hooks';
 import { Auth0Provider } from "./react-auth0-spa";
 import config from "./auth_config.json";
 import history from "./utils/history";
 import Infrastructure from "./infrastructure.json";
+import AWSAppSyncClient from 'aws-appsync'
+// import { Rehydrated } from 'aws-appsync-react'
 
 // A function that routes the user to the right place
 // after login
@@ -21,13 +22,22 @@ const onRedirectCallback = appState => {
   );
 };
 
-const client = new ApolloClient({
-    uri: Infrastructure.aws_appsync_graphql_api_uris.value.GRAPHQL,
-  });
+const ApolloAuthDetails = {
+    region: Infrastructure.region.value,
+    auth: {
+        type: Infrastructure.aws_appsync_graphql_api_authentication_type.value,
+        apiKey: Infrastructure.aws_appsync_graphql_api_api_key.value,
+    },
+    url: Infrastructure.aws_appsync_graphql_api_uris.value.GRAPHQL,
+  };
+console.log(ApolloAuthDetails)
+const client = new AWSAppSyncClient(ApolloAuthDetails);
   
 const Appollo = () => (
     <ApolloProvider client={client}>
-        <App />
+        {/* <Rehydrated> */}
+            <App />
+        {/* </Rehydrated> */}
     </ApolloProvider>
 );
 
@@ -50,9 +60,12 @@ serviceWorker.unregister();
 // client
 //   .query({
 //     query: gql`
-//       {
-//         rates(currency: "USD") {
-//           currency
+//       query listMinistackArticles {
+//         listMinistackArticles {
+//           items {
+//             id,
+//             title      
+//           }
 //         }
 //       }
 //     `
