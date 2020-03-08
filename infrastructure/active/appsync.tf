@@ -153,6 +153,19 @@ EOF
 
 }
 
+resource "aws_appsync_api_key" "example" {
+  api_id  = aws_appsync_graphql_api.test.id
+  expires = timeadd(timestamp(), "8760h")
+}
+
+output "APPSYNC_KEY" {
+	value = aws_appsync_api_key.example.key
+}
+
+output "APPSYNC_URIS" {
+	value = aws_appsync_graphql_api.test.uris
+}
+
 resource "aws_appsync_datasource" "example" {
   api_id           = aws_appsync_graphql_api.test.id
   name             = "ministack_article"

@@ -45,6 +45,7 @@ jobs:
             /tmp/terraform/terraform apply --auto-approve
             /tmp/terraform/terraform output > /tmp/terraform.output
             cat /tmp/terraform.output
+            /tmp/terraform/terraform output -json > /tmp/terraform.output.json
             popd
       - run:
           name: Install AWS cli
@@ -58,6 +59,7 @@ jobs:
           name: Build website
           command: |
             pushd website
+            cp /tmp/terraform.output.json ./src/terraform.output.json
             npm install
             npm run build
             popd

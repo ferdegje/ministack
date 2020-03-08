@@ -6,10 +6,10 @@
     },
     "AppSync": {
         "Default": {
-            "ApiUrl": "https://ynicszwmsnclhdot6ak4hv4pfe.appsync-api.eu-west-2.amazonaws.com/graphql",
+            "ApiUrl": "https://vvdy7b6bkrgnnbhan2hwgcbjye.appsync-api.eu-west-2.amazonaws.com/graphql",
             "Region": "eu-west-2",
             "AuthMode": "API_KEY",
-            "ApiKey": "da2-u5nu7opizfcj5gp6tgpc253m5u",
+            "ApiKey": "da2-vdlmwqjpjfegdpt65zxvygfdnm",
             "ClientDatabasePrefix": "tf-example_API_KEY"
         }
     }

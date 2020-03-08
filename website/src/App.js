@@ -7,17 +7,18 @@ import { Router, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import { useAuth0 } from "./react-auth0-spa";
 import Profile from "./components/Profile";
+import ListPosts from "./components/ListPosts";
 import history from "./utils/history";
 
 import './App.css';
 
 const EXCHANGE_RATES = gql`
-  {
-    rates(currency: "USD") {
-      currency
-      rate
+  listMinistackArticles {
+      items {
+        id
+        title
+      }
     }
-  }
 `;
 
 function ExchangeRates() {
@@ -52,6 +53,7 @@ function App() {
           <Switch>
             <Route path="/" exact />
             <PrivateRoute path="/profile" component={Profile} />
+            <PrivateRoute path="/list" component={ListPosts} />
           </Switch>
           <ExchangeRates />
         </header>

@@ -9,6 +9,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { Auth0Provider } from "./react-auth0-spa";
 import config from "./auth_config.json";
 import history from "./utils/history";
+import Infrastructure from "./terraform.output.json";
 
 // A function that routes the user to the right place
 // after login
@@ -21,7 +22,7 @@ const onRedirectCallback = appState => {
 };
 
 const client = new ApolloClient({
-    uri: 'https://48p1r2roz4.sse.codesandbox.io',
+    uri: Infrastructure.APPSYNC_URIS.value.GRAPHQL,
   });
   
 const Appollo = () => (

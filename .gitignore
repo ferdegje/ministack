@@ -3,3 +3,4 @@ infrastructure.json
 **/node_modules/*
 **/.terraform/*
 **/*.icloud
+website/src/terraform.output.json
