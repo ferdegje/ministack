@@ -9,7 +9,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { Auth0Provider } from "./react-auth0-spa";
 import config from "./auth_config.json";
 import history from "./utils/history";
-import Infrastructure from "./terraform.output.json";
+import Infrastructure from "./infrastructure.json";
 
 // A function that routes the user to the right place
 // after login
@@ -22,7 +22,7 @@ const onRedirectCallback = appState => {
 };
 
 const client = new ApolloClient({
-    uri: Infrastructure.APPSYNC_URIS.value.GRAPHQL,
+    uri: Infrastructure.aws_appsync_graphql_api_uris.value.GRAPHQL,
   });
   
 const Appollo = () => (
@@ -47,14 +47,14 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-client
-  .query({
-    query: gql`
-      {
-        rates(currency: "USD") {
-          currency
-        }
-      }
-    `
-  })
-  .then(result => console.log(result));
+// client
+//   .query({
+//     query: gql`
+//       {
+//         rates(currency: "USD") {
+//           currency
+//         }
+//       }
+//     `
+//   })
+//   .then(result => console.log(result));

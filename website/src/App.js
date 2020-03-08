@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
-import { gql } from "apollo-boost";
-import { useQuery } from '@apollo/react-hooks';
+// import { gql } from "apollo-boost";
+// import { useQuery } from '@apollo/react-hooks';
 import NavBar from "./components/NavBar";
 import { Router, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
@@ -12,29 +12,29 @@ import history from "./utils/history";
 
 import './App.css';
 
-const EXCHANGE_RATES = gql`
-  listMinistackArticles {
-      items {
-        id
-        title
-      }
-    }
-`;
+// const EXCHANGE_RATES = gql`
+//   listMinistackArticles {
+//       items {
+//         id
+//         title
+//       }
+//     }
+// `;
 
-function ExchangeRates() {
-  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+// function ExchangeRates() {
+//   const { loading, error, data } = useQuery(EXCHANGE_RATES);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p>Error :(</p>;
 
-  return data.rates.map(({ currency, rate }) => (
-    <div key={currency}>
-      <p>
-        {currency}: {rate}
-      </p>
-    </div>
-  ));
-}
+//   return data.rates.map(({ currency, rate }) => (
+//     <div key={currency}>
+//       <p>
+//         {currency}: {rate}
+//       </p>
+//     </div>
+//   ));
+// }
 
 function App() {
   const { loading } = useAuth0();
@@ -55,7 +55,7 @@ function App() {
             <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute path="/list" component={ListPosts} />
           </Switch>
-          <ExchangeRates />
+          {/* <ExchangeRates /> */}
         </header>
       </Router>
     </div>
