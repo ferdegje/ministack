@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
 // import { gql } from "apollo-boost";
-// import { useQuery } from '@apollo/react-hooks';
 import NavBar from "./components/NavBar";
 import { Router, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";

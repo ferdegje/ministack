@@ -55,3 +55,18 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+// client
+//   .query({
+//     query: gql`
+//       query listMinistackArticles {
+//         listMinistackArticles {
+//           items {
+//             id,
+//             title      
+//           }
+//         }
+//       }
+//     `
+//   })
+//   .then(result => console.log(result));
