@@ -60,14 +60,14 @@ jobs:
           name: Build website
           command: |
             pushd website
-            cp /tmp/terraform.output.json ./src/infrastructure.json
+            cp /tmp/terraform.output.json ./infrastructure.json
             npm install
             npm run build
             popd
       - run:
           name: Deploy website
           command: |
-            pushd website/build
+            pushd website/.next
             aws s3 sync ./ s3://`grep www /tmp/terraform.output | cut -d = -f 2 | tr -d " "` --delete --acl public-read
             popd
   test:
