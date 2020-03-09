@@ -67,7 +67,7 @@ jobs:
       - run:
           name: Deploy website
           command: |
-            pushd website/.next
+            pushd website/out
             aws s3 sync ./ s3://`grep www /tmp/terraform.output | cut -d = -f 2 | tr -d " "` --delete --acl public-read
             popd
   test:
