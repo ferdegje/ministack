@@ -3,6 +3,10 @@ import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
 import ErrorMessage from './ErrorMessage'
 import PostUpvoter from './PostUpvoter'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 
 export const ALL_POSTS_QUERY = gql`
   query listMinistackArticles {
@@ -57,54 +61,16 @@ export default function PostList() {
   // const areMorePosts = listMinistackArticles.length < _listMinistackArticlesMeta.count
 
   return (
-    <section>
-      <ul>
+    <Container fluid="true">
+      <Row>
         {listMinistackArticles.items.map((post, index) => (
-          <li key={post.id}>
-            <div>
-              <span>{post.title}</span>
-            </div>
-          </li>
+          <Col key={post.id} lg="4">
+            <Card>
+              <Card.Body>{post.title}</Card.Body>
+            </Card>
+          </Col>
         ))}
-      </ul>
-      <style jsx>{`
-        section {
-          padding-bottom: 20px;
-        }
-        li {
-          display: block;
-          margin-bottom: 10px;
-        }
-        div {
-          align-items: center;
-          display: flex;
-        }
-        a {
-          font-size: 14px;
-          margin-right: 10px;
-          text-decoration: none;
-          padding-bottom: 0;
-          border: 0;
-        }
-        span {
-          font-size: 14px;
-          margin-right: 5px;
-        }
-        ul {
-          margin: 0;
-          padding: 0;
-        }
-        button:before {
-          align-self: center;
-          border-style: solid;
-          border-width: 6px 4px 0 4px;
-          border-color: #ffffff transparent transparent transparent;
-          content: '';
-          height: 0;
-          margin-right: 5px;
-          width: 0;
-        }
-      `}</style>
-    </section>
+      </Row>
+    </Container>
   )
 }

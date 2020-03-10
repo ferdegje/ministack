@@ -2,6 +2,8 @@ import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { ALL_POSTS_QUERY, allPostsQueryVars } from './PostList'
 import { v4 as uuidv4 } from 'uuid';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const CREATE_POST_MUTATION = gql`
   mutation createMinistackArticle($createministackarticleinput: CreateMinistackArticleInput!) {
@@ -31,7 +33,6 @@ export default function Submit() {
         }
       },
       update: (proxy, { data: { createPost } }) => {
-        console.log(data);
         const data = proxy.readQuery({
           query: ALL_POSTS_QUERY,
           variables: allPostsQueryVars,
@@ -46,7 +47,7 @@ export default function Submit() {
               items: [{
                 id: id,
                 title: title,
-                __typename: "hello"
+                __typename: "MinistackArticle"
               },...data.listMinistackArticles.items]
             }
           },
@@ -57,12 +58,14 @@ export default function Submit() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Submit</h1>
-      <input placeholder="title" name="title" type="text" required />
-      <button type="submit" disabled={loading}>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label>Submit</Form.Label>
+        <Form.Control placeholder="title" name="title" type="text" required />
+      </Form.Group>
+      <Button variant="primary" type="submit" disabled={loading}>
         Submit
-      </button>
+      </Button>
       <style jsx>{`
         form {
           border-bottom: 1px solid #ececec;
@@ -77,6 +80,6 @@ export default function Submit() {
           margin-bottom: 10px;
         }
       `}</style>
-    </form>
+    </Form>
   )
 }

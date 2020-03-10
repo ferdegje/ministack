@@ -5,10 +5,12 @@ import Submit from '../components/Submit'
 import PostList from '../components/PostList'
 import { withApollo } from '../lib/apollo'
 
+import Jumbotron from 'react-bootstrap/Jumbotron';
+
 const IndexPage = () => (
   <App>
     <Header />
-    <InfoBox>
+    <Jumbotron>
       ℹ️ This example shows how to fetch all initial apollo queries on the
       server. If you <a href="/">reload</a> this page you won't see a loader
       since Apollo fetched all needed data on the server. This prevents{' '}
@@ -20,7 +22,7 @@ const IndexPage = () => (
         automatic static optimization
       </a>{' '}
       in favour of full Server-Side-Rendering.
-    </InfoBox>
+    </Jumbotron>
     <Submit />
     <PostList />
   </App>
