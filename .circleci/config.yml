@@ -10,8 +10,8 @@ jobs:
           command: |
             mkdir /tmp/terraform
             pushd /tmp/terraform
-            wget -c https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_linux_amd64.zip
-            unzip terraform_0.12.20_linux_amd64.zip
+            wget -c https://releases.hashicorp.com/terraform/0.12.23/terraform_0.12.23_linux_amd64.zip
+            unzip terraform_0.12.23_linux_amd64.zip
             popd
       - run:
           name: Install dependencies
@@ -84,8 +84,8 @@ jobs:
           command: |
             mkdir /tmp/terraform
             pushd /tmp/terraform
-            wget -c https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_linux_amd64.zip
-            unzip terraform_0.12.20_linux_amd64.zip
+            wget -c https://releases.hashicorp.com/terraform/0.12.23/terraform_0.12.23_linux_amd64.zip
+            unzip terraform_0.12.23_linux_amd64.zip
             popd
       - run:
           name: Install dependencies
