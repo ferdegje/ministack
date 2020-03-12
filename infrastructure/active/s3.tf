@@ -3,22 +3,24 @@ resource "aws_kms_key" "mykey" {
   deletion_window_in_days = 10
 }
 
-resource "aws_s3_bucket" "www" {
-  bucket = "${local.project}.${local.domain}"
+resource "aws_s3_bucket" "infrastructure" {
+  bucket = "infrastructure.${local.project}.${local.domain}"
   acl    = "public-read"
 
+  force_destroy = "true"
+  
   website {
     index_document = "index.html"
     error_document = "index.html"
   }
 }
 
-output "www" {
-  value = aws_s3_bucket.www.bucket
+output "aws_s3_bucket-infrastructure" {
+  value = aws_s3_bucket.infrastructure.bucket
 }
 
 resource "aws_s3_bucket_policy" "default" {
-  bucket = aws_s3_bucket.www.id
+  bucket = aws_s3_bucket.infrastructure.id
   policy = data.aws_iam_policy_document.default.json
 }
 
@@ -26,7 +28,7 @@ data "aws_iam_policy_document" "default" {
   statement {
     actions = ["s3:GetObject"]
 
-    resources = ["${aws_s3_bucket.www.arn}/*"]
+    resources = ["${aws_s3_bucket.infrastructure.arn}/*"]
 
     principals {
       type        = "AWS"

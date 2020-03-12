@@ -57,19 +57,17 @@ jobs:
             sudo pip install awscli --upgrade
             aws --version
       - run:
-          name: Build website
+          name: Deploy generated_assets
           command: |
-            pushd website
+            mkdir aws_s3_bucket-infrastructure
+            pushd aws_s3_bucket-infrastructure
             cp /tmp/terraform.output.json ./infrastructure.json
-            npm install
-            npm run build
+            aws s3 sync ./ s3://`grep aws_s3_bucket-infrastructure /tmp/terraform.output | cut -d = -f 2 | tr -d " "` --delete --acl public-read
             popd
       - run:
-          name: Deploy website
+          name: Deploy Website
           command: |
-            pushd website/out
-            aws s3 sync ./ s3://`grep www /tmp/terraform.output | cut -d = -f 2 | tr -d " "` --delete --acl public-read
-            popd
+            echo "That activity has been delegated to https://zeit.co/ferdegje"
   test:
     docker:
       - image: circleci/node:8.10.0
