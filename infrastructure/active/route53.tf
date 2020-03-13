@@ -20,5 +20,5 @@ resource "aws_route53_record" "www-dev" {
   type    = "CNAME"
   ttl     = "5"
 
-  records        = ["${local.project}.now.sh"]
+  records        = ["alias.zeit.co"]
 }
