@@ -6,7 +6,7 @@ createApolloClient();
 export default function Test() {
   return (
     <Card>
-        <Card.Body>TEST</Card.Body>
+        <Card.Body>A TEST</Card.Body>
     </Card>
   )
 }
