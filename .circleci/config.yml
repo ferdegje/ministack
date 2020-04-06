@@ -110,7 +110,7 @@ jobs:
           command: |
             pushd infrastructure/dormant
             /tmp/terraform/terraform init
-            /tmp/terraform/terraform apply --auto-approve
+            /tmp/terraform/terraform apply --auto-approve -var-file=../../website/project.tfvars.json
             popd
 
 workflows:
