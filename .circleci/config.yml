@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    parallelism: 1
     docker:
       - image: circleci/node:12.9.1-browsers
     steps:
@@ -43,7 +42,7 @@ jobs:
           command: |
             pushd infrastructure/active
             /tmp/terraform/terraform init
-            /tmp/terraform/terraform apply --auto-approve
+            /tmp/terraform/terraform apply --auto-approve -lock=true -lock-timeout=300s
             /tmp/terraform/terraform output -json > /tmp/terraform.output.json
             /tmp/terraform/terraform output > /tmp/terraform.output
             cat /tmp/terraform.output
