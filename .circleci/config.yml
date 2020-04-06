@@ -42,7 +42,7 @@ jobs:
           command: |
             pushd infrastructure/active
             /tmp/terraform/terraform init
-            /tmp/terraform/terraform apply --auto-approve -lock=true -lock-timeout=300s
+            /tmp/terraform/terraform apply --auto-approve -lock=true -lock-timeout=300s -var-file=../../website/project.tfvars.json
             /tmp/terraform/terraform output -json > /tmp/terraform.output.json
             /tmp/terraform/terraform output > /tmp/terraform.output
             cat /tmp/terraform.output

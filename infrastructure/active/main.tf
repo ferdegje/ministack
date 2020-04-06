@@ -17,15 +17,31 @@ terraform {
 }
 
 locals {
-  region          = "eu-west-2"
-  accountId       = "314027424334"
-  domain          = "nokdo.com"
-  project         = "ministack"
-  projectLongName = "Ministack demo"
+  region          = var.region
+  accountId       = var.accountId
+  domain          = var.domain
+  project         = var.project
+  projectLongName = var.projectLongName
+}
+
+variable "region" {
+  default = ""
+}
+variable "accountId" {
+  default = ""
+}
+variable "domain" {
+  default = ""
+}
+variable "project" {
+  default = ""
+}
+variable "projectLongName" {
+  default = ""
 }
 
 output "region" {
-  value = local.region
+  value = var.region
 }
 
 output "projectName" {
