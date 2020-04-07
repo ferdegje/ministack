@@ -10,7 +10,7 @@ export default function createApolloClient(initialState, ctx) {
     link: new HttpLink({
       uri: "https://graphql-"+MiniStack.project+"."+MiniStack.domain+"/graphql", // Server URL (must be absolute)
       headers: {
-        "x-api-key": "da2-vfxzgqrp6fhpxkod2asjlctvee",
+        "x-api-key": "da2-nujjwgwcg5amzdxk3n4v53iyqm",
         "Cache-Control": "no-cache"
       },
       // useGETForQueries: true

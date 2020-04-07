@@ -4,3 +4,5 @@ infrastructure.json
 **/.terraform/*
 **/*.icloud
 website/src/terraform.output.json
+
+.now

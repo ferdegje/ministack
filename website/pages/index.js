@@ -3,6 +3,7 @@ import InfoBox from '../components/InfoBox'
 import Header from '../components/Header'
 import Submit from '../components/Submit'
 import PostList from '../components/PostList'
+import Test from '../components/Test'
 import { withApollo } from '../lib/apollo'
 
 import Jumbotron from 'react-bootstrap/Jumbotron';
@@ -25,6 +26,7 @@ const IndexPage = () => (
     </Jumbotron>
     <Submit />
     <PostList />
+    <Test />
   </App>
 )
 

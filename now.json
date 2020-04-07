@@ -1,0 +1,7 @@
+{
+    "build": {
+      "env": {
+        "AUTH0_CLIENT_SECRET": "@auth0_client_secret"
+      }
+    }
+  }

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { withRouter } from 'next/router'
+import LoginBox from './LoginBox'
 
 const Header = ({ router: { pathname } }) => (
   <header>
@@ -33,6 +34,7 @@ const Header = ({ router: { pathname } }) => (
         text-decoration: underline;
       }
     `}</style>
+    <LoginBox />
   </header>
 )
 
