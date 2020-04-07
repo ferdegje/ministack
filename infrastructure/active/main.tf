@@ -40,14 +40,6 @@ variable "projectLongName" {
   default = ""
 }
 
-output "region" {
-  value = var.region
-}
-
-output "projectName" {
-  value = local.project
-}
-
 data "aws_route53_zone" "primary" {
   name = "${local.domain}."
 }

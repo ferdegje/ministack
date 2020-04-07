@@ -15,10 +15,6 @@ resource "aws_s3_bucket" "infrastructure" {
   }
 }
 
-output "aws_s3_bucket-infrastructure" {
-  value = aws_s3_bucket.infrastructure.bucket
-}
-
 resource "aws_s3_bucket_policy" "default" {
   bucket = aws_s3_bucket.infrastructure.id
   policy = data.aws_iam_policy_document.default.json
