@@ -14,24 +14,6 @@ jobs:
             unzip terraform_0.12.23_linux_amd64.zip
             popd
       - run:
-          name: Install dependencies
-          command: |
-            pushd api
-            npm install
-            popd
-      - run:
-          name: Package endpoint lambda
-          command: |
-            pushd api
-            zip -r lambda_function_payload.zip *
-            popd
-      - run:
-          name: Package dynamo processor lambda
-          command: |
-            pushd dynamo_processor
-            zip -r lambda_function_payload.zip *
-            popd
-      - run:
           name: Check terraform state path
           command: |
             pushd infrastructure
@@ -45,24 +27,6 @@ jobs:
             /tmp/terraform/terraform apply --auto-approve -lock=true -lock-timeout=300s -var-file=../../website/project.tfvars.json
             /tmp/terraform/terraform output -json > /tmp/terraform.output.json
             /tmp/terraform/terraform output > /tmp/terraform.output
-            cat /tmp/terraform.output
-            /tmp/terraform/terraform output -json > /tmp/terraform.output.json
-            popd
-      - run:
-          name: Install AWS cli
-          command: |
-            curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-            sudo python get-pip.py
-            sudo apt-get install python-dev
-            sudo pip install awscli --upgrade
-            aws --version
-      - run:
-          name: Deploy generated_assets
-          command: |
-            mkdir aws_s3_bucket-infrastructure
-            pushd aws_s3_bucket-infrastructure
-            cp /tmp/terraform.output.json ./infrastructure.json
-            aws s3 sync ./ s3://`grep aws_s3_bucket-infrastructure /tmp/terraform.output | cut -d = -f 2 | tr -d " "` --delete --acl public-read
             popd
       - run:
           name: Deploy Website
@@ -86,24 +50,6 @@ jobs:
             pushd /tmp/terraform
             wget -c https://releases.hashicorp.com/terraform/0.12.23/terraform_0.12.23_linux_amd64.zip
             unzip terraform_0.12.23_linux_amd64.zip
-            popd
-      - run:
-          name: Install dependencies
-          command: |
-            pushd api
-            npm install
-            popd
-      - run:
-          name: Package lambdas
-          command: |
-            pushd api
-            zip -r lambda_function_payload.zip *
-            popd
-      - run:
-          name: Package dynamo processor lambda
-          command: |
-            pushd dynamo_processor
-            zip -r lambda_function_payload.zip *
             popd
       - run:
           name: Delete infrastructure

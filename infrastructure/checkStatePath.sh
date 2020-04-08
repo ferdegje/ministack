@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
-echo totoo
+### Sanity checking script. As I use the same bucket for all my personal project state files, changing the key for each project
+### I want to make sure that manual change has been implemented
 EXPECTED_VALUE=`git remote -v | grep fetch | cut -d "@" -f 2 | cut -d "(" -f 1 | sed s_:_/_ | sed s_.git_/terraform.tfstate_ | tr -d " "`
 echo "EXPECTED_VALUE: $EXPECTED_VALUE"
 for i in `ls -d */`; do
