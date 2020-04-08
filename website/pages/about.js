@@ -5,7 +5,7 @@ const AboutPage = () => (
   <App>
     <Header />
     <article>
-      <h1>The Idea Behind This Example</h1>
+      <h1>The Ideas Behind This Example</h1>
       <p>
         <a href="https://www.apollographql.com/client/">Apollo</a> is a GraphQL
         client that allows you to easily query the exact data you need from a
