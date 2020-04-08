@@ -3,7 +3,6 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Link from 'next/link'
-import auth0 from '../utils/auth0';
 import { Component, useContext } from 'react'
 import UserContext from './UserContext'
 
