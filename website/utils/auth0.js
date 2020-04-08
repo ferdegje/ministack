@@ -2,7 +2,8 @@ import { initAuth0 } from '@auth0/nextjs-auth0';
 import MiniStack from '../project.tfvars.json'
 
 const protocol  = process.env.NODE_ENV=="development" ? "http":"https"
-const host      = process.env.NODE_ENV=="development" ? "localhost:3000":MiniStack.domain
+const prodHost  = MiniStack.project + "." + MiniStack.domain
+const host      = process.env.NODE_ENV=="development" ? "localhost:3000":prodHost
 
 export default initAuth0({
   domain: MiniStack.auth0.domain,

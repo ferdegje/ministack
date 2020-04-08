@@ -8,19 +8,20 @@ import UserContext from './UserContext'
 
 export default function LoginBox() {
         let { user } = useContext(UserContext)
-        return user
-            ? (
-                <Link href="/api/logout">
-                    <a>
+        if (user == null) 
+            return "..."
+        else if (user)
+            return (
+                <a href="/api/logout">
                         Logout
-                    </a>
-                </Link>
+                </a>
             )
-            : (
-                <Link href="/api/login">
-                    <a>
+        else
+            return (
+                <a href="/api/login">
+                    
                         Login
-                    </a>
-                </Link>
+                    
+                </a>
             )
 }

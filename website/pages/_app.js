@@ -9,14 +9,17 @@ class MyApp extends App {
     };
     
     async componentDidMount() {
-        const token = await fetch('/api/token');
-        if (token.ok) {
-            const user = await fetch('/api/me');
+        const user = await fetch('/api/me');
+        if (user.ok) {
+            const token = await fetch('/api/token');
             this.setState({
                 user: user.json(),
                 token: token.text()
             });
         } else {
+            this.setState({
+                user: false
+            })
             console.log("User is not logged in")
         }
     }
