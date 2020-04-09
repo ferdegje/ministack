@@ -1,5 +1,12 @@
+variable "auth0" {
+	default = {}
+}
 resource "aws_appsync_graphql_api" "test" {
-  authentication_type = "API_KEY"
+  authentication_type = "OPENID_CONNECT"
+  openid_connect_config {
+    issuer = "https://${var.auth0.domain}"
+  }
+
   name                = local.project
   schema              = <<EOF
 input CreateMinistackArticleInput {
@@ -153,17 +160,8 @@ EOF
 
 }
 
-output "aws_appsync_graphql_api_api_key" {
-	value = aws_appsync_api_key.test.key
-}
-
 output "aws_appsync_graphql_api_authentication_type" {
 	value = aws_appsync_graphql_api.test.authentication_type
-}
-
-resource "aws_appsync_api_key" "test" {
-  api_id  = aws_appsync_graphql_api.test.id
-  expires = timeadd(timestamp(), "8760h")
 }
 
 resource "aws_appsync_datasource" "example" {
