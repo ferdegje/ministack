@@ -18,6 +18,7 @@
     "graphql-tag": "2.10.3",
     "isomorphic-unfetch": "^3.0.0",
     "next": "latest",
+    "node-fetch": "^2.6.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-bootstrap": "^1.0.0-beta.17",
