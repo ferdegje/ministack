@@ -6,6 +6,18 @@ This code has two intents:
 # Demo
 The ministack is accessible at https://ministackapi.nokdo.com/ping
 
+# Pre-requisite
+1. Setup Auth0
+1.1 Create an account on Auth0 (free)
+1.2 Go to Application and create a new application of type Regular Web Applications (while you are there you can also remove the "Test Application" that was created with your API)
+1.3 In Settings, get the Client ID and copy it in website/project.tfvars.json
+1.4 In Settings, get the Client Secret and copy it in website/.env
+1.5 In Settings, get the Client Secret and run "now secret add auth0_client_secret VALUE" where VALUE is replaced by the Client Secret value
+1.6 In Settings, set the Callbacks URLs to the domains where your app will run followed by the callback url (http://localhost:3000/api/callback,https://ministack.nokdo.com/api/callback)
+1.7 In Settings, set the Logout URLs to the domains where your app will run (http://localhost:3000,https://ministack.nokdo.com)
+1.8 Go to APIs > Create API and create an API.
+1.9 Give it the same identifier as the website https://ministack.nokdo.com
+
 # Content
 ## Structure
 This codebase contains the following, organised in folders:
