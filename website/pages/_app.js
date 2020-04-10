@@ -12,15 +12,25 @@ class MyApp extends App {
         fetch('/api/me')
             .then(resp => resp.json())
             .then(data => {
-                fetch('/api/token')
+                if (data.error) {
+                    console.log("/api/me")
+                    console.log(data)
+                    this.setState({user: false, token: false})
+                } else {
+                    fetch('/api/token')
                     .then(resp => resp.json())
                     .then(data => {
                         localStorage.setItem('access_token', data.access_token);
                         this.setState({token: data})
                     })
-                this.setState({user: data})
+                    this.setState({user: data, token: false})
+                }
             })
-            .catch(error => this.setState({user: false}))
+            .catch(error => {
+                console.log("/api/me")
+                console.log(error)
+                this.setState({user: false})
+            })
     }
 
     render() {
