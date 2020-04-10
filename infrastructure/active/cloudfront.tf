@@ -32,7 +32,7 @@ resource "aws_cloudfront_distribution" "appsync" {
 
 	forwarded_values {
       query_string = false
-      headers      = ["x-api-key"]
+      headers      = ["x-api-key", "Authorization"]
 
       cookies {
         forward = "all"
