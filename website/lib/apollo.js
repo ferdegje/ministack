@@ -60,12 +60,13 @@ const initApolloClient = (initialState, ctx) => {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (typeof window === 'undefined') {
-    return createApolloClient(initialState, ctx)
+    return createApolloClient(initialState, ctx, "")
   }
 
   // Reuse client on the client-side
   if (!globalApolloClient) {
-    globalApolloClient = createApolloClient(initialState, ctx)
+    const access_token = localStorage.getItem('access_token')
+    globalApolloClient = createApolloClient(initialState, ctx, access_token)
   }
 
   return globalApolloClient

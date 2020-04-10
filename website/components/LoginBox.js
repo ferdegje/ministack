@@ -7,16 +7,16 @@ import { Component, useContext } from 'react'
 import UserContext from './UserContext'
 
 export default function LoginBox() {
-        let { user } = useContext(UserContext)
-        if (user == null) 
+        let { user, token } = useContext(UserContext)
+        if (user == null || token == null) 
             return "..."
-        else if (user)
+        else if (user) {
             return (
                 <a href="/api/logout">
-                        Logout
+                        Logout {user.nickname}
                 </a>
             )
-        else
+        } else
             return (
                 <a href="/api/login">
                     

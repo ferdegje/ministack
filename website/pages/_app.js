@@ -9,26 +9,25 @@ class MyApp extends App {
     };
     
     async componentDidMount() {
-        const user = await fetch('/api/me');
-        if (user.ok) {
-            const token = await fetch('/api/token');
-            this.setState({
-                user: user.json(),
-                token: token.text()
-            });
-        } else {
-            this.setState({
-                user: false
+        fetch('/api/me')
+            .then(resp => resp.json())
+            .then(data => {
+                fetch('/api/token')
+                    .then(resp => resp.json())
+                    .then(data => {
+                        localStorage.setItem('access_token', data.access_token);
+                        this.setState({token: data})
+                    })
+                this.setState({user: data})
             })
-            console.log("User is not logged in")
-        }
+            .catch(error => this.setState({user: false}))
     }
 
     render() {
         const { Component, pageProps } = this.props;
 
         return (
-            <UserContext.Provider value={{ user: this.state.user, token: this.state.token}}>
+            <UserContext.Provider value={{ user: this.state.user, token: this.state.token, dumb: this.state.dumb}}>
             <Component {...pageProps} />
             </UserContext.Provider>
         );
