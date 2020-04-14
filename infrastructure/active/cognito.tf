@@ -15,6 +15,14 @@ resource "aws_cognito_user_pool_client" "client" {
   supported_identity_providers = ["COGNITO"]
 }
 
+output "client_id" {
+    value = aws_cognito_user_pool_client.client.id
+}
+
+output "client_secret" {
+    value = aws_cognito_user_pool_client.client.client_secret
+}
+
 resource "aws_cognito_user_pool_domain" "main" {
   domain       = replace("${local.project}.${local.domain}", ".", "-")
   user_pool_id = "${aws_cognito_user_pool.pool.id}"

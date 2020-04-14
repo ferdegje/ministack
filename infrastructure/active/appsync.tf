@@ -2,9 +2,11 @@ variable "auth0" {
 	default = {}
 }
 resource "aws_appsync_graphql_api" "test" {
-  authentication_type = "OPENID_CONNECT"
-  openid_connect_config {
-    issuer = "https://${var.auth0.domain}"
+  authentication_type = "AMAZON_COGNITO_USER_POOLS"
+  user_pool_config {
+    aws_region     = local.region
+    default_action = "DENY"
+    user_pool_id   = "${aws_cognito_user_pool.pool.id}"
   }
 
   name                = local.project
