@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import Link from 'next/link'
 
 const subdomain = (Infrastructure.project.value+"."+Infrastructure.domain.value).replace(/\./g,"-")
-const redirect_uri_hostname = process.env.NODE_ENV=="development" ? "http://localhost:3000" : `https://${subdomain}`
+const redirect_uri_hostname = process.env.NODE_ENV=="development" ? "http://localhost:3000" : `https://${Infrastructure.project.value}.${Infrastructure.domain.value}`
 const domain = `${subdomain}.auth.${Infrastructure.region.value}.amazoncognito.com`
 const queryParameters = {
     'client_id': Infrastructure.client_id.value,

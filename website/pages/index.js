@@ -19,17 +19,19 @@ const Home = () => (
       </p>
 
       <div className="grid">
-        <Link href="/debug" className="card">
+        <Link href="/debug">
           <a className="card">
             <h3>Debug &rarr;</h3>
             <p>Find in-depth information required to debug.</p>
           </a>
         </Link>
 
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Learn &rarr;</h3>
-          <p>Learn about Next.js in an interactive course with quizzes!</p>
-        </a>
+        <Link href="/list">
+          <a className="card">
+            <h3>List &rarr;</h3>
+            <p>To see the full list.</p>
+          </a>
+        </Link>
 
         <a
           href="https://github.com/zeit/next.js/tree/master/examples"
