@@ -37,10 +37,8 @@ jobs:
       - run:
           name: Deploy Website
           command: |
-            pushd website
-            cp /tmp/terraform.output.json ./infrastructure.json
+            cp /tmp/terraform.output.json ./website/infrastructure.json
             now --prod -t $ZEIT_TOKEN -c
-            popd
   test:
     docker:
       - image: circleci/node:8.10.0
