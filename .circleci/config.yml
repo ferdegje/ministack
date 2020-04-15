@@ -39,7 +39,7 @@ jobs:
           command: |
             pushd website
             cp /tmp/terraform.output.json ./infrastructure.json
-            now --prod -t $ZEIT_TOKEN
+            now --prod -t $ZEIT_TOKEN -c
             popd
   test:
     docker:
