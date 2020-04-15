@@ -1,5 +1,8 @@
 resource "aws_cognito_user_pool" "pool" {
   name = "${local.project}.${local.domain}"
+
+  username_attributes = ["email"]
+  auto_verified_attributes = ["email"]
 }
 
 resource "aws_cognito_user_pool_client" "client" {
@@ -10,6 +13,8 @@ resource "aws_cognito_user_pool_client" "client" {
   allowed_oauth_scopes = ["phone","email","profile", "openid"]
   allowed_oauth_flows_user_pool_client = true
 
+  explicit_auth_flows = ["ADMIN_NO_SRP_AUTH"]
+  
   callback_urls = ["https://${local.project}.${local.domain}/api/callback", "http://localhost:3000/api/callback"]
   logout_urls = ["https://${local.project}.${local.domain}/logout", "http://localhost:3000/logout"]
   supported_identity_providers = ["COGNITO"]
