@@ -1,7 +1,13 @@
 import Head from 'next/head'
 import Login from '../components/Login'
 import Link from 'next/link'
+import Infrastructure from "../infrastructure.json"
+import isLoggedInFn from "../lib/isLoggedIn"
 
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1)
+}
+const isLoggedIn = isLoggedInFn()
 const Home = () => (
   <div className="container">
     <Head>
@@ -11,25 +17,41 @@ const Home = () => (
 
     <main>
       <h1 className="title">
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
+        Welcome to <a>{Infrastructure.project.value.capitalize()}</a>
       </h1>
 
       <p className="description">
-        <Login />
+        {Infrastructure.projectLongName.value.capitalize()}
       </p>
 
       <div className="grid">
+        {isLoggedIn?(
+          <Link href="/api/logout">
+          <a className="card">
+            <h3>Log out &rarr;</h3>
+            <p>Log out. This will just remove the cookie.</p>
+          </a>
+        </Link>
+        ):(
+          <Link href="/api/login">
+          <a className="card">
+            <h3>Log in &rarr;</h3>
+            <p>Log in, using Cognito from Amazon Web Services.</p>
+          </a>
+        </Link>
+        )}
+        
+        <Link href="/list">
+          <a className="card">
+            <h3>GraphQL &rarr;</h3>
+            <p>Display info from GraphQL, and send new information.</p>
+          </a>
+        </Link>
+
         <Link href="/debug">
           <a className="card">
             <h3>Debug &rarr;</h3>
             <p>Find in-depth information required to debug.</p>
-          </a>
-        </Link>
-
-        <Link href="/list">
-          <a className="card">
-            <h3>List &rarr;</h3>
-            <p>To see the full list.</p>
           </a>
         </Link>
 
@@ -71,6 +93,10 @@ const Home = () => (
         flex-direction: column;
         justify-content: center;
         align-items: center;
+      }
+
+      .capitalized {
+        text-transform: capitalize;
       }
 
       main {

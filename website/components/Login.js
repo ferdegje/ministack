@@ -18,11 +18,11 @@ export default class Login extends Component {
         const token = Cookies.get('token')
         if (token==undefined) {
             const url = `https://${domain}/login?`+Object.keys(queryParameters).map(key => key + '=' + queryParameters[key]).join('&')
-            return (<a href={url}>Log in</a>)
+            return (<a href={url} className="card">Log in</a>)
         } else {
             return (
                 <Link href={{pathname: '/api/logout'}}>
-                    <a>Log out</a>
+                    <a className="card">Log out</a>
                 </Link>
             )
         }

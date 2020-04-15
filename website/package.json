@@ -19,6 +19,8 @@
     "next-with-apollo": "^5.0.1",
     "node-fetch": "^2.6.0",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-bootstrap": "^1.0.0",
+    "react-dom": "16.13.1",
+    "uuid": "^7.0.3"
   }
 }
