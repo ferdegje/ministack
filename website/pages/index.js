@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Login from '../components/Login'
 
 const Home = () => (
   <div className="container">
@@ -13,7 +14,7 @@ const Home = () => (
       </h1>
 
       <p className="description">
-        Get started by editing <code>pages/index.js</code>
+        <Login />
       </p>
 
       <div className="grid">
