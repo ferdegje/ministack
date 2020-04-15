@@ -2,7 +2,7 @@ import fetch from 'node-fetch'
 import Infrastructure from '../infrastructure.json'
 
 const subdomain = (Infrastructure.project.value+"."+Infrastructure.domain.value).replace(/\./g,"-")
-const redirect_uri_hostname = process.env.NODE_ENV ? "http://localhost:3000" : `https://${subdomain}`
+const redirect_uri_hostname = process.env.NODE_ENV=="development" ? "http://localhost:3000" : `https://${subdomain}`
 const domain = `${subdomain}.auth.${Infrastructure.region.value}.amazoncognito.com`
 
 export default (req, res) => {
