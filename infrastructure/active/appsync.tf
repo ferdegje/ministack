@@ -1,11 +1,8 @@
-variable "auth0" {
-	default = {}
-}
 resource "aws_appsync_graphql_api" "test" {
   authentication_type = "AMAZON_COGNITO_USER_POOLS"
   user_pool_config {
     aws_region     = local.region
-    default_action = "DENY"
+    default_action = "ALLOW"
     user_pool_id   = "${aws_cognito_user_pool.pool.id}"
   }
 
@@ -119,6 +116,9 @@ EOF
 
 }
 
+output "aws_appsync_graphql_api" {
+	value = aws_appsync_graphql_api.test.uris
+}
 resource "aws_iam_role" "example" {
   name = "example"
 

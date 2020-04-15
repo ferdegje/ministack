@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Login from '../components/Login'
+import Link from 'next/link'
 
 const Home = () => (
   <div className="container">
@@ -18,10 +19,12 @@ const Home = () => (
       </p>
 
       <div className="grid">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+        <Link href="/debug" className="card">
+          <a className="card">
+            <h3>Debug &rarr;</h3>
+            <p>Find in-depth information required to debug.</p>
+          </a>
+        </Link>
 
         <a href="https://nextjs.org/learn" className="card">
           <h3>Learn &rarr;</h3>
