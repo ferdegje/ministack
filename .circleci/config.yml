@@ -33,7 +33,7 @@ jobs:
           command: |
             sudo npm install -g now
             mkdir .now
-            cat "{\"projectId\":\"$ZEIT_PROJECT\",\"orgId\":\"$ZEIT_ORG\"}" > ./.now/project.json
+            echo "{\"projectId\":\"$ZEIT_PROJECT\",\"orgId\":\"$ZEIT_ORG\"}" > ./.now/project.json
       - run:
           name: Deploy Website
           command: |
