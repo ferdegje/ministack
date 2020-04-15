@@ -1,5 +1,5 @@
 resource "aws_route53_record" "media" {
-  zone_id = data.aws_route53_zone.selected.zone_id
+  zone_id = data.aws_route53_zone.primary.zone_id
   name    = aws_s3_bucket.media.bucket
   type    = "A"
 

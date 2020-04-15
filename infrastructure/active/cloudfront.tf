@@ -68,7 +68,7 @@ resource "aws_s3_bucket" "cloudfront" {
 }
 
 resource "aws_route53_record" "graphql" {
-  zone_id = data.aws_route53_zone.selected.zone_id
+  zone_id = data.aws_route53_zone.primary.zone_id
   name    = "graphql-${local.project}"
   type    = "A"
 

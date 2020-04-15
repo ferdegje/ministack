@@ -26,6 +26,7 @@ output "client_id" {
 
 output "client_secret" {
     value = aws_cognito_user_pool_client.client.client_secret
+    sensitive = true
 }
 
 resource "aws_cognito_user_pool_domain" "main" {
