@@ -6,3 +6,4 @@ infrastructure.json
 website/src/terraform.output.json
 
 .now
+**/.DS_Store
