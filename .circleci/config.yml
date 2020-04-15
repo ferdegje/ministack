@@ -24,14 +24,23 @@ jobs:
           command: |
             pushd infrastructure/active
             /tmp/terraform/terraform init
-            /tmp/terraform/terraform apply --auto-approve -lock=true -lock-timeout=300s -var-file=../../website/project.tfvars.json
+            /tmp/terraform/terraform apply --auto-approve -lock=true -lock-timeout=300s
             /tmp/terraform/terraform output -json > /tmp/terraform.output.json
             /tmp/terraform/terraform output > /tmp/terraform.output
             popd
       - run:
+          name: Configure Zeit
+          command: |
+            npm install -g now
+            mkdir .now
+            cat "{\"projectId\":\"$ZEIT_PROJECT\",\"orgId\":\"$ZEIT_ORG\"}" > ./.now/project.json
+      - run:
           name: Deploy Website
           command: |
-            echo "That activity has been delegated to https://zeit.co/ferdegje"
+            pushd website
+            cp /tmp/terraform.output.json ./infrastructure.json
+            now --prod -t $ZEIT_TOKEN
+            popd
   test:
     docker:
       - image: circleci/node:8.10.0
@@ -56,7 +65,7 @@ jobs:
           command: |
             pushd infrastructure/dormant
             /tmp/terraform/terraform init
-            /tmp/terraform/terraform apply --auto-approve -var-file=../../website/project.tfvars.json
+            /tmp/terraform/terraform apply --auto-approve
             popd
 
 workflows:
