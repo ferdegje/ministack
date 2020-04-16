@@ -29,7 +29,11 @@ export default (req, res) => {
         return data.json()
     }).then(jsonLoad => {
         res.statusCode = 302
-        res.setHeader('Set-Cookie', "token="+JSON.stringify(jsonLoad)+"; Path=/")
+        var now = new Date();
+        var time = now.getTime();
+        var expireTime = time + 1000*(jsonLoad.expires_in - 1);
+        now.setTime(expireTime);
+        res.setHeader('Set-Cookie', `token=${JSON.stringify(jsonLoad)}; expires=${now.toGMTString()};Path=/`)
         res.setHeader("Location", "/")
         res.end(JSON.stringify(jsonLoad))
     })
